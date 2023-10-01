@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './BookDetails.module.css';
 
 const BookDetails = ({ details }) => {
-  console.log(details);
   return (
     <div className={styles.bookDetails}>
       <div className={styles.detailsContainer}>
