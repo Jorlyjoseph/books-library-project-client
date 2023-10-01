@@ -1,0 +1,14 @@
+.container {
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+.header {
+  margin-bottom: 40px;
+}
+
+.btnContainer {
+  text-align: right;
+  margin-top: 20px;
+}
