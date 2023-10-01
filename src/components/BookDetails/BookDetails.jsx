@@ -1,33 +1,34 @@
 import React from 'react';
 import styles from './BookDetails.module.css';
 
-const BookDetails = () => {
+const BookDetails = ({ details }) => {
+  console.log(details);
   return (
     <div className={styles.bookDetails}>
       <div className={styles.detailsContainer}>
         <div className={styles.info}>
           <div className={styles.label}>Title</div>
-          <div>Dracula</div>
+          <div>{details.title}</div>
         </div>
         <div className={styles.info}>
           <div className={styles.label}>Location</div>
-          <div>B-12A</div>
+          <div>{details.location}</div>
         </div>
         <div className={styles.info}>
           <div className={styles.label}>Author</div>
-          <div>Bram Stocker</div>
+          <div>{details.author}</div>
         </div>
         <div className={styles.info}>
           <div className={styles.label}>Category</div>
-          <div>Horror</div>
+          <div>{details.catagory}</div>
         </div>
         <div className={styles.info}>
           <div className={styles.label}>Published</div>
-          <div>1897</div>
+          <div>{details.published}</div>
         </div>
         <div className={styles.info}>
           <div className={styles.label}>Reader</div>
-          <div>Jorly</div>
+          <div>{details.reader}</div>
         </div>
       </div>
 
@@ -45,10 +46,23 @@ const BookDetails = () => {
         </div>
 
         <div className={styles.bookActions}>
-          <button type="button" className="btn btn-primary">
-            Lent
-          </button>
-          <span className="badge text-bg-success">Available</span>
+          {details.available ? (
+            <button type="button" className="btn btn-primary">
+              Lent
+            </button>
+          ) : (
+            <button type="button" className="btn btn-primary">
+              Return
+            </button>
+          )}
+
+          <div>
+            {details.available ? (
+              <span className="badge text-bg-success">Available</span>
+            ) : (
+              <span className="badge text-bg-danger">Not Available</span>
+            )}
+          </div>
         </div>
       </div>
     </div>

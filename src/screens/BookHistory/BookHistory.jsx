@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './BookHistory.module.css';
 import BookDetails from '../../components/BookDetails/BookDetails';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const BookHistory = () => {
+  const { bookId } = useParams();
+  const [details, setDetails] = useState({});
+  const url = `http://localhost:5005/api/books/${bookId}`;
+
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url
+    }).then((bookDetails) => {
+      setDetails(bookDetails.data);
+    });
+  }, []);
+
   return (
     <div className={styles.container}>
       <h2>Book History</h2>
-      <BookDetails />
+      <BookDetails details={details} />
       <div className={styles.bookLogsContainer}>
         <div className={styles.bookLogs}>
           <div className={styles.info}>
