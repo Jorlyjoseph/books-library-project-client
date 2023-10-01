@@ -11,7 +11,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/reader/new" element={<ReaderRegistration />} />
-        <Route path="/book/:bookid" element={<BookHistory />} />
+        <Route path="/book/:bookid/history" element={<BookHistory />} />
       </Routes>
     </div>
   );
