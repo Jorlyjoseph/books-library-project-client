@@ -1,57 +1,69 @@
+import { useState } from 'react';
 import styles from './AddEditBooks.module.css';
 
 const AddEditBooks = () => {
+  const [language, setLanguage] = useState('DEFAULT');
+  const [category, setCategory] = useState('DEFAULT');
+
   return (
     <div className={styles.container}>
+      <h2>Add books</h2>
       <form>
         <div className="mb-3">
-          <label htmlFor="Name" className="form-label">
-            Title
-          </label>
-          <input type="text" className="form-control" id="Name" />
+          <label className="form-label">Title</label>
+          <input type="text" className="form-control" />
         </div>
 
         <div className="mb-3">
-          <label htmlFor="Name" className="form-label">
-            Author
-          </label>
-          <input type="text" className="form-control" id="Name" />
+          <label className="form-label">Author</label>
+          <input type="text" className="form-control" />
         </div>
 
-        <select class="form-select" aria-label="Default select example">
-          <option selected>Category</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+        <label className="form-label">Category</label>
+        <select
+          className="form-select mb-3"
+          onChange={(event) => {
+            setCategory(event.target.value);
+          }}
+          value={category}
+        >
+          <option value="DEFAULT" disabled>
+            Please Select
+          </option>
+          <option value="Fiction">Fiction</option>
+          <option value="Romance">Romance</option>
+          <option value="Horror">Horror</option>
         </select>
 
-        <select class="form-select" aria-label="Default select example">
-          <option selected>Language</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+        <label className="form-label">Language</label>
+        <select
+          className="form-select mb-3"
+          onChange={(event) => {
+            setLanguage(event.target.value);
+          }}
+          value={language}
+        >
+          <option value="DEFAULT" disabled>
+            Please Select
+          </option>
+          <option value="English">English</option>
+          <option value="German">German</option>
+          <option value="Hindi">Hindi</option>
+          <option value="Malayalam">Malayalam</option>
         </select>
 
         <div className="mb-3">
-          <label htmlFor="Name" className="form-label">
-            Location
-          </label>
-          <input type="text" className="form-control" id="Name" />
+          <label className="form-label">Location</label>
+          <input type="text" className="form-control" />
         </div>
 
-        <div class="mb-3">
-          <label for="exampleFormControlTextarea1" class="form-label">
-            Description
-          </label>
-          <textarea
-            class="form-control"
-            id="exampleFormControlTextarea1"
-            rows="3"
-          ></textarea>
+        <div className="mb-3">
+          <label className="form-label">Description</label>
+          <textarea className="form-control" rows="3" />
         </div>
 
         <div className={styles.btnContainer}>
-          <button type="button" class="btn btn-link">
+          <button type="button" className="btn btn-link">
             Cancel
           </button>
 

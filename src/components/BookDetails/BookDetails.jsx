@@ -4,6 +4,9 @@ import styles from './BookDetails.module.css';
 const BookDetails = ({ details }) => {
   return (
     <div className={styles.bookDetails}>
+      <div className={styles.imgContainer}>
+        <img className={styles.image} src={details.image_url} />
+      </div>
       <div className={styles.detailsContainer}>
         <div className={styles.info}>
           <div className={styles.label}>Title</div>

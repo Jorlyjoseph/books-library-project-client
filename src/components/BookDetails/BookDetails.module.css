@@ -2,8 +2,16 @@
   border-radius: 5px;
   border: 1px solid rgba(55, 41, 41, 0.2);
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 150px 2fr 1fr;
   padding: 24px 36px;
+}
+
+.imgContainer {
+  height: 150px;
+}
+
+.image {
+  height: 100%;
 }
 
 .detailsContainer {
