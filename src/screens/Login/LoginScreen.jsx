@@ -31,16 +31,7 @@ const LoginScreen = () => {
             id="exampleInputPassword1"
           />
         </div>
-        <div className="mb-3 form-check">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            id="exampleCheck1"
-          />
-          <label className="form-check-label" for="exampleCheck1">
-            Check me out
-          </label>
-        </div>
+
         <div className={styles.btnContainer}>
           <button type="button" class="btn btn-link">
             Cancel
