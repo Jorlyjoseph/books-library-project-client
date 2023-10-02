@@ -31,7 +31,7 @@ const BookHistory = () => {
     <div className={styles.container}>
       <h2>Book History</h2>
       <BookDetails details={details} />
-      {logs.map(({ _id, time, transaction_type }) => (
+      {logs.map(({ _id, time, transaction_type, reader_id }) => (
         <div className={styles.bookLogsContainer} key={_id}>
           <div className={styles.bookLogs}>
             <div className={styles.info}>
@@ -41,7 +41,7 @@ const BookHistory = () => {
 
             <div className={styles.info}>
               <div className={styles.label}>Reader</div>
-              <div>Jorly J</div>
+              <div>{reader_id.name}</div>
             </div>
 
             <div>
