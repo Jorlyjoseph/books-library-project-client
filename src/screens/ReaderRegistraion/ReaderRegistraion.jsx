@@ -1,11 +1,32 @@
 import { useState } from 'react';
 import styles from './ReaderRegistraion.module.css';
+import axios from 'axios';
 
 const ReaderRegistration = () => {
   const [readerName, setReaderName] = useState('');
   const [email, setEmail] = useState('');
   const [dob, setDob] = useState('');
   const [doj, setDoj] = useState('');
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    axios({
+      method: 'post',
+      url: `http://localhost:5005/api/readers/create`,
+      data: {
+        name: readerName,
+        dob: dob,
+        email: email,
+        registrationDate: doj
+      }
+    }).then(() => {
+      setReaderName('');
+      setEmail('');
+      setDob('');
+      setDoj('');
+    });
+  };
 
   return (
     <div className={styles.container}>
@@ -65,7 +86,11 @@ const ReaderRegistration = () => {
             Cancel
           </button>
 
-          <button type="submit" className="btn btn-primary">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            onClick={submitHandler}
+          >
             Submit
           </button>
         </div>
