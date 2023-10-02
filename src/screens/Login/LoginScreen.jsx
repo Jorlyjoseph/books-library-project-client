@@ -1,6 +1,28 @@
+import { useState } from 'react';
 import styles from './LoginScreen.module.css';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const LoginScreen = () => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    axios({
+      method: 'post',
+      url: `http://localhost:5005/api/login`,
+      data: {
+        email: email,
+        password: password
+      }
+    }).then(() => {
+      navigate('/');
+    });
+  };
+
   return (
     <div className={styles.container}>
       <h2 className={styles.header}>The Book Oracle</h2>
@@ -8,36 +30,41 @@ const LoginScreen = () => {
 
       <form>
         <div className="mb-3">
-          <label for="exampleInputEmail1" className="form-label">
-            Email address
-          </label>
+          <label className="form-label">Email address</label>
           <input
             type="email"
             className="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
+            value={email}
+            onChange={(event) => {
+              setEmail(event.target.value);
+            }}
           />
-          <div id="emailHelp" className="form-text">
+          <div className="form-text">
             We'll never share your email with anyone else.
           </div>
         </div>
         <div className="mb-3">
-          <label for="exampleInputPassword1" className="form-label">
-            Password
-          </label>
+          <label className="form-label">Password</label>
           <input
             type="password"
             className="form-control"
-            id="exampleInputPassword1"
+            value={password}
+            onChange={(event) => {
+              setPassword(event.target.value);
+            }}
           />
         </div>
 
         <div className={styles.btnContainer}>
-          <button type="button" class="btn btn-link">
+          <button type="button" className="btn btn-link">
             Cancel
           </button>
 
-          <button type="submit" className="btn btn-primary">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            onClick={submitHandler}
+          >
             Login
           </button>
         </div>
@@ -45,4 +72,5 @@ const LoginScreen = () => {
     </div>
   );
 };
+
 export default LoginScreen;
