@@ -8,6 +8,7 @@ import LoginScreen from './screens/Login/LoginScreen';
 import AddEditBooks from './screens/AddEditBooks/AddEditBooks';
 import LentBook from './screens/LentBook/LentBook';
 import ReaderSearch from './screens/ReaderSearch/ReaderSearch';
+import Home from './screens/Home/Home';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/book/new" element={<AddEditBooks />} />
         <Route path="/book/:bookId/lent" element={<LentBook />} />
         <Route path="/reader" element={<ReaderSearch />} />
+        <Route path="/" element={<Home />} />
       </Routes>
     </div>
   );

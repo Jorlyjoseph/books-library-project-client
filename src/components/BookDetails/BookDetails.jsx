@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './BookDetails.module.css';
+import { Link } from 'react-router-dom';
 
 const BookDetails = ({ details }) => {
   return (
@@ -37,7 +38,9 @@ const BookDetails = ({ details }) => {
       <div className={styles.actionContainer}>
         <div className={styles.userActions}>
           <div>
-            <i className="bi bi-clock-history"></i>
+            <Link to={`/book/${details._id}/history`}>
+              <i className="bi bi-clock-history"></i>
+            </Link>
           </div>
           <div>
             <i className="bi bi-pencil-square"></i>
@@ -48,15 +51,17 @@ const BookDetails = ({ details }) => {
         </div>
 
         <div className={styles.bookActions}>
-          {details.available ? (
-            <button type="button" className="btn btn-primary">
-              Lent
-            </button>
-          ) : (
-            <button type="button" className="btn btn-primary">
-              Return
-            </button>
-          )}
+          <div>
+            {details.available ? (
+              <button type="button" className="btn btn-primary btn-lg ">
+                Lent
+              </button>
+            ) : (
+              <button type="button" className="btn btn-primary btn-lg">
+                Return
+              </button>
+            )}
+          </div>
 
           <div>
             {details.available ? (
