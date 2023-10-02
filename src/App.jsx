@@ -4,6 +4,8 @@ import './App.css';
 import ReaderRegistration from './screens/ReaderRegistraion/ReaderRegistraion';
 import Navbar from './components/Navbar/Navbar';
 import BookHistory from './screens/BookHistory/BookHistory';
+import LoginScreen from './screens/Login/LoginScreen';
+import AddEditBooks from './screens/AddEditBooks/AddEditBooks';
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
       <Routes>
         <Route path="/reader/new" element={<ReaderRegistration />} />
         <Route path="/book/:bookId/history" element={<BookHistory />} />
+        <Route path="/login" element={<LoginScreen />} />
+        <Route path="/book/new" element={<AddEditBooks />} />
       </Routes>
     </div>
   );

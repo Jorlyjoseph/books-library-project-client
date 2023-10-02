@@ -1,0 +1,20 @@
+.container {
+  width: 40%;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+.header {
+  width: 314px;
+  height: 55px;
+  margin-left: 200px;
+}
+
+.name {
+  margin-left: 200px;
+  margin-bottom: 25px;
+}
+
+.btnContainer {
+  text-align: right;
+  margin-top: 20px;
+}
