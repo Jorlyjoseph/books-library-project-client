@@ -1,0 +1,13 @@
+/* .container {
+  margin: 0 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr ifr;
+} */
+.bookLogs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 5px;
+  border-radius: 5px;
+  border: 1px solid rgba(55, 41, 41, 0.2);
+  padding: 14px 30px;
+}
