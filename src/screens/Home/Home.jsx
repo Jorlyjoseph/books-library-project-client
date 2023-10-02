@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Home.module.css';
 import axios from 'axios';
+import BookDetails from '../../components/BookDetails/BookDetails';
 
 const Home = () => {
   const [query, setQuery] = useState('');
@@ -70,7 +71,11 @@ const Home = () => {
           </div>
         </div>
 
-        <div className={styles.bookListContainer}></div>
+        <div className={styles.bookListContainer}>
+          {bookList.map((book) => (
+            <BookDetails details={book} key={book._id} />
+          ))}
+        </div>
       </div>
     </form>
   );
