@@ -1,12 +1,26 @@
 import { useState } from 'react';
 import styles from './LoginScreen.module.css';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const LoginScreen = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const submitHandler = (event) => {
     event.preventDefault();
+
+    axios({
+      method: 'post',
+      url: `http://localhost:5005/api/login`,
+      data: {
+        email: email,
+        password: password
+      }
+    }).then(() => {
+      navigate('/');
+    });
   };
 
   return (
