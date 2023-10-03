@@ -5,7 +5,10 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+      <nav
+        className="navbar navbar-expand-lg bg-primary fixed-top"
+        data-bs-theme="dark"
+      >
         <div className="container-fluid">
           <Link to="/" className="navbar-brand">
             <img src="/book-icon.svg" alt="Bootstrap" width="30" height="24" />
