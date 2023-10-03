@@ -1,41 +1,98 @@
+import axios from 'axios';
 import styles from './LentBook.module.css';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+
+// 1. fetch readers list
+// 2. fetch book details by bookId
+// 3. lent book submit api call
+
+//http://localhost:5005/api/readers
 
 const LentBook = () => {
+  const navigate = useNavigate();
+  const { bookId } = useParams();
+  const [details, setDetails] = useState({});
+  const [readers, setReaders] = useState([]);
+  const [selectedUser, setSelectedUser] = useState('');
+
+  // http://localhost:5005/api/logs/transaction
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    axios({
+      method: 'post',
+      url: `http://localhost:5005/api/logs/transaction`,
+      data: {
+        bookId: bookId,
+        readerId: selectedUser,
+        date: '2003-01-11',
+        type: 'lent'
+      }
+    }).then(() => {
+      navigate(`/book/${bookId}/history`);
+    });
+  };
+
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `http://localhost:5005/api/readers`
+    }).then((bookReaders) => {
+      setReaders(bookReaders.data);
+    });
+
+    axios({
+      method: 'get',
+      url: `http://localhost:5005/api/books/${bookId}`
+    }).then((bookDetails) => {
+      setDetails(bookDetails.data);
+    });
+  }, []);
+
   return (
     <div className={styles.container}>
-      <div className={styles.container}>
-        <form>
-          <div className="mb-3">
-            <label htmlFor="Name" className="form-label">
-              Title
-            </label>
-            <input type="text" className="form-control" id="Name" />
+      <h2 className={styles.title}>Lent Book</h2>
+      <div className={styles.innerContainer}>
+        <div className={styles.nameValuePair}>
+          <div className={styles.label}>Title</div>
+          <div>{details.title}</div>
+        </div>
+        <div className={styles.nameValuePair}>
+          <div className={styles.label}>Author</div>
+          <div>{details.author}</div>
+        </div>
+        <div className={styles.nameValuePair}>
+          <div className={styles.label}>Reader</div>
+          <div>
+            <select
+              className="form-select"
+              onChange={(event) => {
+                setSelectedUser(event.target.value);
+              }}
+            >
+              {readers.map((reader) => (
+                <option value={reader._id} key={reader._id}>
+                  {reader.name}
+                </option>
+              ))}
+            </select>
           </div>
+        </div>
 
-          <div className="mb-3">
-            <label htmlFor="Name" className="form-label">
-              Author
-            </label>
-            <input type="text" className="form-control" id="Name" />
-          </div>
+        <div className={styles.btnContainer}>
+          <button type="button" className="btn btn-link">
+            Cancel
+          </button>
 
-          <select className="form-select" aria-label="Default select example">
-            <option selected>Reader</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-
-          <div className={styles.btnContainer}>
-            <button type="button" className="btn btn-link">
-              Cancel
-            </button>
-
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
-          </div>
-        </form>
+          <button
+            type="submit"
+            className="btn btn-primary"
+            onClick={submitHandler}
+          >
+            Submit
+          </button>
+        </div>
       </div>
     </div>
   );
