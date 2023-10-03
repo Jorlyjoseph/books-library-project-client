@@ -1,8 +1,10 @@
 import React from 'react';
 import styles from './BookDetails.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const BookDetails = ({ details }) => {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.bookDetails}>
       <div className={styles.imgContainer}>
@@ -23,7 +25,7 @@ const BookDetails = ({ details }) => {
         </div>
         <div className={styles.info}>
           <div className={styles.label}>Category</div>
-          <div>{details.catagory}</div>
+          <div>{details.category}</div>
         </div>
         <div className={styles.info}>
           <div className={styles.label}>Published</div>
@@ -43,7 +45,9 @@ const BookDetails = ({ details }) => {
             </Link>
           </div>
           <div>
-            <i className="bi bi-pencil-square"></i>
+            <Link to={`/book/${details._id}/edit`}>
+              <i className="bi bi-pencil-square"></i>
+            </Link>
           </div>
           <div>
             <i className="bi bi-trash3"></i>
@@ -53,7 +57,11 @@ const BookDetails = ({ details }) => {
         <div className={styles.bookActions}>
           <div>
             {details.available ? (
-              <button type="button" className="btn btn-primary btn-lg ">
+              <button
+                type="button"
+                className="btn btn-primary btn-lg"
+                onClick={() => navigate(`/book/${details._id}/lent`)}
+              >
                 Lent
               </button>
             ) : (
