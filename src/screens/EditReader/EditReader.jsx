@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import styles from './EditReader.module.css';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as dayjs from 'dayjs';
 
 const EditReader = () => {
+  const navigate = useNavigate();
   const { readerId } = useParams();
   const [readerName, setReaderName] = useState('');
   const [email, setEmail] = useState('');
@@ -16,7 +17,6 @@ const EditReader = () => {
       method: 'get',
       url: `http://localhost:5005/api/readers/${readerId}`
     }).then(({ data }) => {
-      console.log(data);
       setReaderName(data.name);
       setEmail(data.email);
       setDob(dayjs(data.dob).format('YYYY-MM-DD'));
@@ -28,8 +28,8 @@ const EditReader = () => {
     event.preventDefault();
 
     axios({
-      method: 'post',
-      url: `http://localhost:5005/api/readers/create`,
+      method: 'put',
+      url: `http://localhost:5005/api/readers/${readerId}`,
       data: {
         name: readerName,
         dob: dob,
@@ -37,10 +37,7 @@ const EditReader = () => {
         registrationDate: doj
       }
     }).then(() => {
-      setReaderName('');
-      setEmail('');
-      setDob('');
-      setDoj('');
+      navigate('/');
     });
   };
 

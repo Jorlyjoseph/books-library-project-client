@@ -3,12 +3,6 @@ import styles from './LentBook.module.css';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-// 1. fetch readers list
-// 2. fetch book details by bookId
-// 3. lent book submit api call
-
-//http://localhost:5005/api/readers
-
 const LentBook = () => {
   const navigate = useNavigate();
   const { bookId } = useParams();
@@ -16,7 +10,6 @@ const LentBook = () => {
   const [readers, setReaders] = useState([]);
   const [selectedUser, setSelectedUser] = useState('');
 
-  // http://localhost:5005/api/logs/transaction
   const submitHandler = (event) => {
     event.preventDefault();
 
