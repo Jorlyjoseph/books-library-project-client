@@ -1,6 +1,26 @@
+import axios from 'axios';
 import styles from './LentBook.module.css';
+import { useEffect, useState } from 'react';
+
+// 1. fetch readers list
+// 2. fetch book details by bookId
+// 3. lent book submit api call
+
+//http://localhost:5005/api/readers
 
 const LentBook = () => {
+  const [readers, setReaders] = useState([]);
+
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `http://localhost:5005/api/readers`
+    }).then((bookReaders) => {
+      setReaders(bookReaders.data);
+      console.log(bookReaders);
+    });
+  }, []);
+
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Lent Book</h2>
@@ -17,10 +37,11 @@ const LentBook = () => {
           <div className={styles.label}>Reader</div>
           <div>
             <select className="form-select">
-              <option selected>Reader</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              {readers.map((reader) => (
+                <option value={reader._id} key={reader._id}>
+                  {reader.name}
+                </option>
+              ))}
             </select>
           </div>
         </div>
