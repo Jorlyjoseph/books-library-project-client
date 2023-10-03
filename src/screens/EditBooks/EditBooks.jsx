@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './EditBooks.module.css';
 import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const EditBooks = () => {
+  const { bookId } = useParams();
+  const navigate = useNavigate();
   const [language, setLanguage] = useState('DEFAULT');
   const [category, setCategory] = useState('DEFAULT');
   const [bookTitle, setBookTitle] = useState('');
@@ -13,12 +16,29 @@ const EditBooks = () => {
   const [isbn, setIsbn] = useState('');
   const [published, setPublished] = useState('');
 
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `http://localhost:5005/api/books/${bookId}`
+    }).then(({ data }) => {
+      setLanguage(data.language);
+      setCategory(data.catagory);
+      setBookTitle(data.title);
+      setBookAuthor(data.author);
+      setBookLocation(data.location);
+      setImageUrl(data.image_url);
+      setBookDescription(data.description);
+      setIsbn(data.isbn);
+      setPublished(data.published);
+    });
+  }, []);
+
   const submitHandler = (event) => {
     event.preventDefault();
 
     axios({
-      method: 'post',
-      url: `http://localhost:5005/api/books`,
+      method: 'put',
+      url: `http://localhost:5005/api/books/${bookId}`,
       data: {
         title: bookTitle,
         author: bookAuthor,
@@ -30,21 +50,11 @@ const EditBooks = () => {
         isbn: isbn,
         published: published
       }
-    }).then((response) => {
-      console.log('resp', response);
-      setBookTitle('');
-      setBookAuthor('');
-      setCategory('');
-      setLanguage('');
-      setBookLocation('');
-      setImageUrl('');
-      setBookDescription('');
-      setIsbn('');
-      setPublished('');
+    }).then(() => {
+      navigate('/');
     });
   };
 
-  console.log(language, category, isbn);
   return (
     <div className={styles.container}>
       <h2>Edit books</h2>
