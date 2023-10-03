@@ -9,7 +9,7 @@ const AddEditBooks = () => {
   const [bookAuthor, setBookAuthor] = useState('');
   const [bookLocation, setBookLocation] = useState('');
   const [imageUrl, setImageUrl] = useState('');
-  const [BookDescription, setBookDescription] = useState('');
+  const [bookDescription, setBookDescription] = useState('');
   const [isbn, setIsbn] = useState('');
   const [published, setPublished] = useState('');
 
@@ -26,7 +26,7 @@ const AddEditBooks = () => {
         language: language,
         location: bookLocation,
         imageUrl: imageUrl,
-        description: BookDescription,
+        description: bookDescription,
         isbn: isbn,
         published: published
       }
@@ -143,13 +143,13 @@ const AddEditBooks = () => {
         </div>
 
         <div className="mb-3">
-          <label className="form-label">Img URL</label>
+          <label className="form-label">Image</label>
           <input
             type="text"
             className="form-control"
             value={imageUrl}
             onChange={(event) => {
-              setimageUrl(event.target.value);
+              setImageUrl(event.target.value);
             }}
           />
         </div>
@@ -159,7 +159,7 @@ const AddEditBooks = () => {
           <textarea
             className="form-control"
             rows="3"
-            value={BookDescription}
+            value={bookDescription}
             onChange={(event) => {
               setBookDescription(event.target.value);
             }}
@@ -176,7 +176,7 @@ const AddEditBooks = () => {
             className="btn btn-primary"
             onClick={submitHandler}
           >
-            Submit
+            Save
           </button>
         </div>
       </form>
