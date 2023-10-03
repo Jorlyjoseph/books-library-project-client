@@ -27,47 +27,51 @@ const Home = () => {
     <form onSubmit={submitHandler}>
       <div className={styles.container}>
         <div className={styles.searchContainer}>
-          <div className="input-group input-group-lg">
-            <span className="input-group-text">
-              <i className="bi bi-search"></i>
-            </span>
+          <div className={styles.searchBox}>
+            <div className="input-group input-group-lg">
+              <span className="input-group-text">
+                <i className="bi bi-search"></i>
+              </span>
 
-            <input
-              type="text"
-              className="form-control"
-              onChange={(event) => {
-                setQuery(event.target.value);
-              }}
-              value={query}
-            />
+              <input
+                type="text"
+                className="form-control"
+                onChange={(event) => {
+                  setQuery(event.target.value);
+                }}
+                value={query}
+              />
+            </div>
           </div>
 
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="filter"
-              value="title"
-              checked={category === 'title'}
-              onChange={(event) => {
-                setCategory(event.target.value);
-              }}
-            />
-            <label className="form-check-label">Title</label>
-          </div>
+          <div className={styles.filterContainer}>
+            <div className="form-check form-check-inline">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="filter"
+                value="title"
+                checked={category === 'title'}
+                onChange={(event) => {
+                  setCategory(event.target.value);
+                }}
+              />
+              <label className="form-check-label">Title</label>
+            </div>
 
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="filter"
-              value="author"
-              checked={category === 'author'}
-              onChange={(event) => {
-                setCategory(event.target.value);
-              }}
-            />
-            <label className="form-check-label">Author</label>
+            <div className="form-check form-check-inline">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="filter"
+                value="author"
+                checked={category === 'author'}
+                onChange={(event) => {
+                  setCategory(event.target.value);
+                }}
+              />
+              <label className="form-check-label">Author</label>
+            </div>
           </div>
         </div>
 

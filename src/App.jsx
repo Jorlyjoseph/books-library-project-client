@@ -10,6 +10,7 @@ import EditBooks from './screens/EditBooks/EditBooks';
 import LentBook from './screens/LentBook/LentBook';
 import ReaderSearch from './screens/ReaderSearch/ReaderSearch';
 import Home from './screens/Home/Home';
+import EditReader from './screens/EditReader/EditReader';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/book/:bookId/edit" element={<EditBooks />} />
         <Route path="/book/:bookId/lent" element={<LentBook />} />
         <Route path="/reader" element={<ReaderSearch />} />
+        <Route path="/reader/:readerId/edit" element={<EditReader />} />
         <Route path="/" element={<Home />} />
       </Routes>
     </div>
