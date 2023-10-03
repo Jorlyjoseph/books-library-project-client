@@ -1,7 +1,7 @@
 import axios from 'axios';
 import styles from './LentBook.module.css';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 // 1. fetch readers list
 // 2. fetch book details by bookId
@@ -10,9 +10,29 @@ import { useParams } from 'react-router-dom';
 //http://localhost:5005/api/readers
 
 const LentBook = () => {
+  const navigate = useNavigate();
   const { bookId } = useParams();
   const [details, setDetails] = useState({});
   const [readers, setReaders] = useState([]);
+  const [selectedUser, setSelectedUser] = useState('');
+
+  // http://localhost:5005/api/logs/transaction
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    axios({
+      method: 'post',
+      url: `http://localhost:5005/api/logs/transaction`,
+      data: {
+        bookId: bookId,
+        readerId: selectedUser,
+        date: '2003-01-11',
+        type: 'lent'
+      }
+    }).then(() => {
+      navigate(`/book/${bookId}/history`);
+    });
+  };
 
   useEffect(() => {
     axios({
@@ -47,7 +67,12 @@ const LentBook = () => {
         <div className={styles.nameValuePair}>
           <div className={styles.label}>Reader</div>
           <div>
-            <select className="form-select">
+            <select
+              className="form-select"
+              onChange={(event) => {
+                setSelectedUser(event.target.value);
+              }}
+            >
               {readers.map((reader) => (
                 <option value={reader._id} key={reader._id}>
                   {reader.name}
@@ -62,7 +87,11 @@ const LentBook = () => {
             Cancel
           </button>
 
-          <button type="submit" className="btn btn-primary">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            onClick={submitHandler}
+          >
             Submit
           </button>
         </div>
