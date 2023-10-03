@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import styles from './AddEditBooks.module.css';
+import styles from './AddBooks.module.css';
 import axios from 'axios';
 
-const AddEditBooks = () => {
+const AddBooks = () => {
   const [language, setLanguage] = useState('DEFAULT');
   const [category, setCategory] = useState('DEFAULT');
   const [bookTitle, setBookTitle] = useState('');
@@ -184,4 +184,4 @@ const AddEditBooks = () => {
   );
 };
 
-export default AddEditBooks;
+export default AddBooks;
