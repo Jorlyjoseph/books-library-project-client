@@ -1,22 +1,76 @@
 import { useState } from 'react';
 import styles from './AddEditBooks.module.css';
+import axios from 'axios';
 
 const AddEditBooks = () => {
   const [language, setLanguage] = useState('DEFAULT');
   const [category, setCategory] = useState('DEFAULT');
+  const [bookTitle, setBookTitle] = useState('');
+  const [bookAuthor, setBookAuthor] = useState('');
+  const [bookLocation, setBookLocation] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+  const [BookDescription, setBookDescription] = useState('');
+  const [isbn, setIsbn] = useState('');
+  const [published, setPublished] = useState('');
 
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    axios({
+      method: 'post',
+      url: `http://localhost:5005/api/books`,
+      data: {
+        title: bookTitle,
+        author: bookAuthor,
+        category: category,
+        language: language,
+        location: bookLocation,
+        imageUrl: imageUrl,
+        description: BookDescription,
+        isbn: isbn,
+        published: published
+      }
+    }).then((response) => {
+      console.log('resp', response);
+      setBookTitle('');
+      setBookAuthor('');
+      setCategory('');
+      setLanguage('');
+      setBookLocation('');
+      setImageUrl('');
+      setBookDescription('');
+      setIsbn('');
+      setPublished('');
+    });
+  };
+
+  console.log(language, category, isbn);
   return (
     <div className={styles.container}>
       <h2>Add books</h2>
-      <form>
+      <form onSubmit={submitHandler}>
         <div className="mb-3">
           <label className="form-label">Title</label>
-          <input type="text" className="form-control" />
+          <input
+            type="text"
+            className="form-control"
+            value={bookTitle}
+            onChange={(event) => {
+              setBookTitle(event.target.value);
+            }}
+          />
         </div>
 
         <div className="mb-3">
           <label className="form-label">Author</label>
-          <input type="text" className="form-control" />
+          <input
+            type="text"
+            className="form-control"
+            value={bookAuthor}
+            onChange={(event) => {
+              setBookAuthor(event.target.value);
+            }}
+          />
         </div>
 
         <label className="form-label">Category</label>
@@ -54,12 +108,62 @@ const AddEditBooks = () => {
 
         <div className="mb-3">
           <label className="form-label">Location</label>
-          <input type="text" className="form-control" />
+          <input
+            type="text"
+            className="form-control"
+            value={bookLocation}
+            onChange={(event) => {
+              setBookLocation(event.target.value);
+            }}
+          />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label">ISBN Num</label>
+          <input
+            type="text"
+            className="form-control"
+            value={isbn}
+            onChange={(event) => {
+              setIsbn(event.target.value);
+            }}
+          />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label">Published</label>
+          <input
+            type="text"
+            className="form-control"
+            value={published}
+            onChange={(event) => {
+              setPublished(event.target.value);
+            }}
+          />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label">Img URL</label>
+          <input
+            type="text"
+            className="form-control"
+            value={imageUrl}
+            onChange={(event) => {
+              setimageUrl(event.target.value);
+            }}
+          />
         </div>
 
         <div className="mb-3">
           <label className="form-label">Description</label>
-          <textarea className="form-control" rows="3" />
+          <textarea
+            className="form-control"
+            rows="3"
+            value={BookDescription}
+            onChange={(event) => {
+              setBookDescription(event.target.value);
+            }}
+          />
         </div>
 
         <div className={styles.btnContainer}>
@@ -67,7 +171,11 @@ const AddEditBooks = () => {
             Cancel
           </button>
 
-          <button type="submit" className="btn btn-primary">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            onClick={submitHandler}
+          >
             Submit
           </button>
         </div>
