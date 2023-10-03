@@ -40,7 +40,6 @@ const LentBook = () => {
       url: `http://localhost:5005/api/readers`
     }).then((bookReaders) => {
       setReaders(bookReaders.data);
-      console.log(bookReaders);
     });
 
     axios({
@@ -51,7 +50,6 @@ const LentBook = () => {
     });
   }, []);
 
-  console.log(details);
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Lent Book</h2>
