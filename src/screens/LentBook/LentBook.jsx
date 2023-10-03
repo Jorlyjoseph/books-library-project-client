@@ -3,39 +3,37 @@ import styles from './LentBook.module.css';
 const LentBook = () => {
   return (
     <div className={styles.container}>
-      <div className={styles.container}>
-        <form>
-          <div className="mb-3">
-            <label htmlFor="Name" className="form-label">
-              Title
-            </label>
-            <input type="text" className="form-control" id="Name" />
+      <h2 className={styles.title}>Lent Book</h2>
+      <div className={styles.innerContainer}>
+        <div className={styles.nameValuePair}>
+          <div className={styles.label}>Title</div>
+          <div>Tarzen</div>
+        </div>
+        <div className={styles.nameValuePair}>
+          <div className={styles.label}>Author</div>
+          <div>Modi</div>
+        </div>
+        <div className={styles.nameValuePair}>
+          <div className={styles.label}>Reader</div>
+          <div>
+            <select className="form-select">
+              <option selected>Reader</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
           </div>
+        </div>
 
-          <div className="mb-3">
-            <label htmlFor="Name" className="form-label">
-              Author
-            </label>
-            <input type="text" className="form-control" id="Name" />
-          </div>
+        <div className={styles.btnContainer}>
+          <button type="button" className="btn btn-link">
+            Cancel
+          </button>
 
-          <select className="form-select" aria-label="Default select example">
-            <option selected>Reader</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-
-          <div className={styles.btnContainer}>
-            <button type="button" className="btn btn-link">
-              Cancel
-            </button>
-
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
-          </div>
-        </form>
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
+        </div>
       </div>
     </div>
   );
