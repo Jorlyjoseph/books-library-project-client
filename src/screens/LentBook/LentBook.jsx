@@ -1,6 +1,7 @@
 import axios from 'axios';
 import styles from './LentBook.module.css';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 // 1. fetch readers list
 // 2. fetch book details by bookId
@@ -9,6 +10,8 @@ import { useEffect, useState } from 'react';
 //http://localhost:5005/api/readers
 
 const LentBook = () => {
+  const { bookId } = useParams();
+  const [details, setDetails] = useState({});
   const [readers, setReaders] = useState([]);
 
   useEffect(() => {
@@ -19,19 +22,27 @@ const LentBook = () => {
       setReaders(bookReaders.data);
       console.log(bookReaders);
     });
+
+    axios({
+      method: 'get',
+      url: `http://localhost:5005/api/books/${bookId}`
+    }).then((bookDetails) => {
+      setDetails(bookDetails.data);
+    });
   }, []);
 
+  console.log(details);
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Lent Book</h2>
       <div className={styles.innerContainer}>
         <div className={styles.nameValuePair}>
           <div className={styles.label}>Title</div>
-          <div>Tarzen</div>
+          <div>{details.title}</div>
         </div>
         <div className={styles.nameValuePair}>
           <div className={styles.label}>Author</div>
-          <div>Modi</div>
+          <div>{details.author}</div>
         </div>
         <div className={styles.nameValuePair}>
           <div className={styles.label}>Reader</div>
