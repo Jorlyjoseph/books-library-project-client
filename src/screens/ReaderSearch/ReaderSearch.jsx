@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import styles from './ReaderSearch.module.css';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const ReaderSearch = () => {
+  const navigate = useNavigate();
   const [query, setQuery] = useState('');
 
   const [readerList, setReaderList] = useState([]);
@@ -19,6 +20,30 @@ const ReaderSearch = () => {
       }
     }).then((reader) => {
       setReaderList(reader.data);
+    });
+  };
+
+  const deactivateHandler = (readerId) => {
+    axios({
+      method: 'put',
+      url: `http://localhost:5005/api/readers/${readerId}`,
+      data: {
+        active: false
+      }
+    }).then(() => {
+      navigate('/');
+    });
+  };
+
+  const activateHandler = (readerId) => {
+    axios({
+      method: 'put',
+      url: `http://localhost:5005/api/readers/${readerId}`,
+      data: {
+        active: true
+      }
+    }).then(() => {
+      navigate('/');
     });
   };
 
@@ -77,7 +102,7 @@ const ReaderSearch = () => {
                       <button
                         type="submit"
                         className="btn btn-primary"
-                        onClick={submitHandler}
+                        onClick={() => deactivateHandler(reader._id)}
                       >
                         Deactivate
                       </button>
@@ -85,7 +110,7 @@ const ReaderSearch = () => {
                       <button
                         type="submit"
                         className="btn btn-primary"
-                        onClick={submitHandler}
+                        onClick={() => activateHandler(reader._id)}
                       >
                         Activate
                       </button>
