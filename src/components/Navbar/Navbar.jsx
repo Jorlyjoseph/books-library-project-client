@@ -1,11 +1,17 @@
 import React, { useContext } from 'react';
 import styles from './Navbar.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import IsPrivate from '../IsPrivate/IsPrivate';
 import { AuthContext } from '../../context/auth.context';
 
 const Navbar = () => {
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, logOutUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const logoutHandler = () => {
+    logOutUser();
+    navigate('/');
+  };
 
   return (
     <div>
@@ -40,13 +46,17 @@ const Navbar = () => {
             </IsPrivate>
             <span className={styles.login}>
               {isLoggedIn ? (
+                <button
+                  type="button"
+                  className={styles.logoutBtn}
+                  onClick={logoutHandler}
+                >
+                  Logout
+                </button>
+              ) : (
                 <Link to="/login" className={styles.loginLink}>
                   Login
                 </Link>
-              ) : (
-                <button type="button" className={styles.logoutBtn}>
-                  Logout
-                </button>
               )}
             </span>
           </div>
