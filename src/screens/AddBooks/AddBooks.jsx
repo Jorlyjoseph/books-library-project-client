@@ -87,6 +87,8 @@ const AddBooks = () => {
           <option value="Fiction">Fiction</option>
           <option value="Romance">Romance</option>
           <option value="Horror">Horror</option>
+          <option value="Thriller">Thriller</option>
+          <option value="Autobiography">Autobiography</option>
         </select>
 
         <label className="form-label">Language</label>
