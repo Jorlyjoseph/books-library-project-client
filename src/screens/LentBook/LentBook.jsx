@@ -2,6 +2,7 @@ import axios from 'axios';
 import styles from './LentBook.module.css';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import * as dayjs from 'dayjs';
 
 const LentBook = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const LentBook = () => {
       data: {
         bookId: bookId,
         readerId: selectedUser,
-        date: '2003-01-11',
+        date: dayjs().format('YYYY-MM-DDTHH:mm'),
         type: 'lent'
       }
     }).then(() => {

@@ -3,6 +3,7 @@ import styles from './BookHistory.module.css';
 import BookDetails from '../../components/BookDetails/BookDetails';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import * as dayjs from 'dayjs';
 
 const BookHistory = () => {
   const { bookId } = useParams();
@@ -23,7 +24,6 @@ const BookHistory = () => {
       url: `http://localhost:5005/api/logs/book/${bookId}`
     }).then((logs) => {
       setLogs(logs.data);
-      console.log(logs.data);
     });
   }, []);
 
@@ -36,7 +36,7 @@ const BookHistory = () => {
           <div className={styles.bookLogs}>
             <div className={styles.info}>
               <div className={styles.label}>Date</div>
-              <div>{time}</div>
+              <div>{dayjs(time).format('DD MMM YYYY @ HH:mm')}</div>
             </div>
 
             <div className={styles.info}>
