@@ -16,6 +16,10 @@ function AuthProviderWrapper(props) {
     localStorage.removeItem('authToken');
   };
 
+  const getToken = () => {
+    return localStorage.getItem('authToken');
+  };
+
   const authenticateUser = () => {
     const storedToken = localStorage.getItem('authToken');
 
@@ -49,6 +53,10 @@ function AuthProviderWrapper(props) {
     authenticateUser();
   };
 
+  const getAuthHeader = () => {
+    return { Authorization: `Bearer ${getToken()}` };
+  };
+
   useEffect(() => {
     authenticateUser();
   }, []);
@@ -62,7 +70,8 @@ function AuthProviderWrapper(props) {
         storeToken,
         authenticateUser,
         logOutUser,
-        removeToken
+        removeToken,
+        getAuthHeader
       }}
     >
       {props.children}
