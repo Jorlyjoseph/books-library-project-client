@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styles from './BookDetails.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import * as dayjs from 'dayjs';
 import IsPrivate from '../IsPrivate/IsPrivate';
+import { AuthContext } from '../../context/auth.context';
 
 const BookDetails = ({ details }) => {
   const navigate = useNavigate();
+  const { getAuthHeader } = useContext(AuthContext);
 
   const returnHandler = (bookId, readerId) => {
     axios({
@@ -17,7 +19,8 @@ const BookDetails = ({ details }) => {
         readerId: readerId,
         date: dayjs().format('YYYY-MM-DDTHH:mm'),
         type: 'return'
-      }
+      },
+      headers: getAuthHeader()
     }).then(() => {
       navigate(`/book/${bookId}/history`);
     });
