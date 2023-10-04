@@ -30,8 +30,7 @@ const AddBooks = () => {
         isbn: isbn,
         published: published
       }
-    }).then((response) => {
-      console.log('resp', response);
+    }).then(() => {
       setBookTitle('');
       setBookAuthor('');
       setCategory('');
@@ -44,7 +43,6 @@ const AddBooks = () => {
     });
   };
 
-  console.log(language, category, isbn);
   return (
     <div className={styles.container}>
       <h2>Add books</h2>

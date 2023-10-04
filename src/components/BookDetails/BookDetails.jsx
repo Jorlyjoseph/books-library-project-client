@@ -1,9 +1,26 @@
 import React from 'react';
 import styles from './BookDetails.module.css';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import * as dayjs from 'dayjs';
 
 const BookDetails = ({ details }) => {
   const navigate = useNavigate();
+
+  const returnHandler = (bookId, readerId) => {
+    axios({
+      method: 'post',
+      url: `http://localhost:5005/api/logs/transaction`,
+      data: {
+        bookId: bookId,
+        readerId: readerId,
+        date: dayjs().format('YYYY-MM-DDTHH:mm'),
+        type: 'return'
+      }
+    }).then(() => {
+      navigate(`/book/${bookId}/history`);
+    });
+  };
 
   return (
     <div className={styles.bookDetails}>
@@ -33,7 +50,7 @@ const BookDetails = ({ details }) => {
         </div>
         <div className={styles.info}>
           <div className={styles.label}>Reader</div>
-          <div>{details.reader}</div>
+          <div>{details.reader_id?.name}</div>
         </div>
       </div>
 
@@ -65,7 +82,13 @@ const BookDetails = ({ details }) => {
                 Lent
               </button>
             ) : (
-              <button type="button" className="btn btn-primary btn-lg">
+              <button
+                type="button"
+                className="btn btn-primary btn-lg"
+                onClick={() => {
+                  returnHandler(details._id, details.reader_id._id);
+                }}
+              >
                 Return
               </button>
             )}
