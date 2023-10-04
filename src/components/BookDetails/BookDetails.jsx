@@ -3,6 +3,7 @@ import styles from './BookDetails.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import * as dayjs from 'dayjs';
+import IsPrivate from '../IsPrivate/IsPrivate';
 
 const BookDetails = ({ details }) => {
   const navigate = useNavigate();
@@ -56,43 +57,47 @@ const BookDetails = ({ details }) => {
 
       <div className={styles.actionContainer}>
         <div className={styles.userActions}>
-          <div>
-            <Link to={`/book/${details._id}/history`}>
-              <i className="bi bi-clock-history"></i>
-            </Link>
-          </div>
-          <div>
-            <Link to={`/book/${details._id}/edit`}>
-              <i className="bi bi-pencil-square"></i>
-            </Link>
-          </div>
-          <div>
-            <i className="bi bi-trash3"></i>
-          </div>
+          <IsPrivate>
+            <div>
+              <Link to={`/book/${details._id}/history`}>
+                <i className="bi bi-clock-history"></i>
+              </Link>
+            </div>
+            <div>
+              <Link to={`/book/${details._id}/edit`}>
+                <i className="bi bi-pencil-square"></i>
+              </Link>
+            </div>
+            <div>
+              <i className="bi bi-trash3"></i>
+            </div>
+          </IsPrivate>
         </div>
 
         <div className={styles.bookActions}>
-          <div>
-            {details.available ? (
-              <button
-                type="button"
-                className="btn btn-primary btn-lg"
-                onClick={() => navigate(`/book/${details._id}/lent`)}
-              >
-                Lent
-              </button>
-            ) : (
-              <button
-                type="button"
-                className="btn btn-primary btn-lg"
-                onClick={() => {
-                  returnHandler(details._id, details.reader_id._id);
-                }}
-              >
-                Return
-              </button>
-            )}
-          </div>
+          <IsPrivate>
+            <div>
+              {details.available ? (
+                <button
+                  type="button"
+                  className="btn btn-primary btn-lg"
+                  onClick={() => navigate(`/book/${details._id}/lent`)}
+                >
+                  Lent
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="btn btn-primary btn-lg"
+                  onClick={() => {
+                    returnHandler(details._id, details.reader_id._id);
+                  }}
+                >
+                  Return
+                </button>
+              )}
+            </div>
+          </IsPrivate>
 
           <div>
             {details.available ? (
