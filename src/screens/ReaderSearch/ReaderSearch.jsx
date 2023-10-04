@@ -118,4 +118,5 @@ const ReaderSearch = () => {
     </div>
   );
 };
+
 export default ReaderSearch;
