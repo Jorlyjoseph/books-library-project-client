@@ -23,24 +23,12 @@ const ReaderSearch = () => {
     });
   };
 
-  const deactivateHandler = (readerId) => {
+  const actionHandler = (readerId, active) => {
     axios({
       method: 'put',
       url: `http://localhost:5005/api/readers/${readerId}`,
       data: {
-        active: false
-      }
-    }).then(() => {
-      navigate('/');
-    });
-  };
-
-  const activateHandler = (readerId) => {
-    axios({
-      method: 'put',
-      url: `http://localhost:5005/api/readers/${readerId}`,
-      data: {
-        active: true
+        active: active
       }
     }).then(() => {
       navigate('/');
@@ -102,7 +90,7 @@ const ReaderSearch = () => {
                       <button
                         type="submit"
                         className="btn btn-primary"
-                        onClick={() => deactivateHandler(reader._id)}
+                        onClick={() => actionHandler(reader._id, false)}
                       >
                         Deactivate
                       </button>
@@ -110,7 +98,7 @@ const ReaderSearch = () => {
                       <button
                         type="submit"
                         className="btn btn-primary"
-                        onClick={() => activateHandler(reader._id)}
+                        onClick={() => actionHandler(reader._id, true)}
                       >
                         Activate
                       </button>
