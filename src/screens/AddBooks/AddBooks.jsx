@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styles from './AddBooks.module.css';
 import axios from 'axios';
+import { API_URL } from '../../config';
 
 const AddBooks = () => {
   const [language, setLanguage] = useState('DEFAULT');
@@ -18,7 +19,7 @@ const AddBooks = () => {
 
     axios({
       method: 'post',
-      url: `http://localhost:5005/api/books`,
+      url: `${API_URL}/api/books`,
       data: {
         title: bookTitle,
         author: bookAuthor,
