@@ -15,6 +15,12 @@
   margin-bottom: 20px;
 }
 
+.readerListContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 20px;
+}
+
 .readerBox {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -32,9 +38,14 @@
 
 .valuePair {
   display: grid;
-  grid-template-columns: 100px 1fr;
+  grid-template-columns: 100px max-content;
 }
 
 .label {
   font-weight: 600;
+}
+
+.rightContainer {
+  display: grid;
+  grid-template-columns: 1fr;
 }

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styles from './ReaderSearch.module.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const ReaderSearch = () => {
   const [query, setQuery] = useState('');
@@ -20,7 +21,7 @@ const ReaderSearch = () => {
       setReaderList(reader.data);
     });
   };
-  console.log(readerList);
+
   return (
     <div className={styles.container}>
       <form onSubmit={submitHandler}>
@@ -48,7 +49,7 @@ const ReaderSearch = () => {
         <div className={styles.readerListContainer}>
           {readerList.length > 0 &&
             readerList.map((reader) => (
-              <div className={styles.readerBox}>
+              <div key={reader._id} className={styles.readerBox}>
                 <div className={styles.leftContainer}>
                   <div className={styles.valuePair}>
                     <div className={styles.label}>Name</div>
@@ -62,25 +63,39 @@ const ReaderSearch = () => {
 
                   <div className={styles.valuePair}>
                     <div className={styles.label}>Status</div>
-                    <div>In Active</div>
-                  </div>
-                </div>
-                <div className={styles.rightContainer}>
-                  <div>
                     {reader.active === true ? (
                       <span className="badge text-bg-success">Active</span>
                     ) : (
-                      <span className="badge text-bg-danger">In Active</span>
+                      <span className="badge text-bg-danger">Inactive</span>
+                    )}
+                  </div>
+                </div>
+
+                <div className={styles.rightContainer}>
+                  <div>
+                    {reader.active === true ? (
+                      <button
+                        type="submit"
+                        className="btn btn-primary"
+                        onClick={submitHandler}
+                      >
+                        Deactivate
+                      </button>
+                    ) : (
+                      <button
+                        type="submit"
+                        className="btn btn-primary"
+                        onClick={submitHandler}
+                      >
+                        Activate
+                      </button>
                     )}
                   </div>
 
                   <div>
-                    {/* <Link to={`/reader/${reader._id}/edit`}>
+                    <Link to={`/reader/${reader._id}/edit`}>
                       <i className="bi bi-pencil-square"></i>
-                    </Link> */}
-                  </div>
-                  <div>
-                    <i className="bi bi-trash3"></i>
+                    </Link>
                   </div>
                 </div>
               </div>
