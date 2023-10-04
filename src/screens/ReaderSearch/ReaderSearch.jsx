@@ -1,15 +1,26 @@
 import { useState } from 'react';
 import styles from './ReaderSearch.module.css';
+import axios from 'axios';
 
 const ReaderSearch = () => {
   const [query, setQuery] = useState('');
+
+  const [readerList, setReaderList] = useState([]);
+
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log(query);
-    // get data using reader search api
-    // save the data to use state
-  };
 
+    axios({
+      method: 'get',
+      url: `http://localhost:5005/api/readers/search/`,
+      params: {
+        query: query
+      }
+    }).then((reader) => {
+      setReaderList(reader.data);
+    });
+  };
+  console.log(readerList);
   return (
     <div className={styles.container}>
       <form onSubmit={submitHandler}>
@@ -34,38 +45,46 @@ const ReaderSearch = () => {
       </form>
 
       <div>
-        {/* map the reader box using reader data set in the use state  */}
-        <div className={styles.readerBox}>
-          <div className={styles.leftContainer}>
-            <div className={styles.valuePair}>
-              <div className={styles.label}>Name</div>
-              <div>John</div>
-            </div>
+        <div className={styles.readerListContainer}>
+          {readerList.length > 0 &&
+            readerList.map((reader) => (
+              <div className={styles.readerBox}>
+                <div className={styles.leftContainer}>
+                  <div className={styles.valuePair}>
+                    <div className={styles.label}>Name</div>
+                    <div>{reader.name}</div>
+                  </div>
 
-            <div className={styles.valuePair}>
-              <div className={styles.label}>Started</div>
-              <div>10-12-2003</div>
-            </div>
+                  <div className={styles.valuePair}>
+                    <div className={styles.label}>Started</div>
+                    <div>{reader.registration_date}</div>
+                  </div>
 
-            <div className={styles.valuePair}>
-              <div className={styles.label}>Status</div>
-              <div>In Active</div>
-            </div>
-          </div>
-          <div className={styles.rightContainer}>
-            <div>
-              <span className="badge text-bg-danger">Borrowed</span>
+                  <div className={styles.valuePair}>
+                    <div className={styles.label}>Status</div>
+                    <div>In Active</div>
+                  </div>
+                </div>
+                <div className={styles.rightContainer}>
+                  <div>
+                    {reader.active === true ? (
+                      <span className="badge text-bg-success">Active</span>
+                    ) : (
+                      <span className="badge text-bg-danger">In Active</span>
+                    )}
+                  </div>
 
-              {/* <span className="badge text-bg-success">Returned</span> */}
-            </div>
-
-            <div>
-              <i className="bi bi-pencil-square"></i>
-            </div>
-            <div>
-              <i className="bi bi-trash3"></i>
-            </div>
-          </div>
+                  <div>
+                    {/* <Link to={`/reader/${reader._id}/edit`}>
+                      <i className="bi bi-pencil-square"></i>
+                    </Link> */}
+                  </div>
+                  <div>
+                    <i className="bi bi-trash3"></i>
+                  </div>
+                </div>
+              </div>
+            ))}
         </div>
       </div>
     </div>
