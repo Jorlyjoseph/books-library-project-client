@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import styles from './BookDetails.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import IsPrivate from '../IsPrivate/IsPrivate';
 import { AuthContext } from '../../context/auth.context';
 import { API_URL } from '../../config';
@@ -12,13 +12,15 @@ const BookDetails = ({ details }) => {
   const { getAuthHeader } = useContext(AuthContext);
 
   const returnHandler = (bookId, readerId) => {
+    const date = dayjs().format('YYYY-MM-DDTHH:mm');
+
     axios({
       method: 'post',
       url: `${API_URL}/api/logs/transaction`,
       data: {
         bookId: bookId,
         readerId: readerId,
-        date: dayjs(new Date()).format('YYYY-MM-DDTHH:mm'),
+        date: date,
         type: 'return'
       },
       headers: getAuthHeader()

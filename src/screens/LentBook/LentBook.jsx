@@ -2,7 +2,7 @@ import axios from 'axios';
 import styles from './LentBook.module.css';
 import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import { API_URL } from '../../config';
 import { AuthContext } from '../../context/auth.context';
 
@@ -16,6 +16,7 @@ const LentBook = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
+    const date = dayjs().format('YYYY-MM-DDTHH:mm');
 
     axios({
       method: 'post',
@@ -23,7 +24,7 @@ const LentBook = () => {
       data: {
         bookId: bookId,
         readerId: selectedUser,
-        date: dayjs(new Date()).format('YYYY-MM-DDTHH:mm'),
+        date,
         type: 'lent'
       },
       headers: getAuthHeader()
