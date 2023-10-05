@@ -5,6 +5,8 @@
   grid-template-columns: 150px 2fr 1fr;
   padding: 24px 36px;
   margin: 20px;
+  background-color: #d5e1e2;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .imgContainer {

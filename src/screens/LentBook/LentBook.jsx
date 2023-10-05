@@ -23,7 +23,7 @@ const LentBook = () => {
       data: {
         bookId: bookId,
         readerId: selectedUser,
-        date: dayjs().format('YYYY-MM-DDTHH:mm'),
+        date: dayjs(new Date()).format('YYYY-MM-DDTHH:mm'),
         type: 'lent'
       },
       headers: getAuthHeader()
