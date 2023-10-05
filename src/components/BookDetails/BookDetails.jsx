@@ -18,7 +18,7 @@ const BookDetails = ({ details }) => {
       data: {
         bookId: bookId,
         readerId: readerId,
-        date: dayjs().format('YYYY-MM-DDTHH:mm'),
+        date: dayjs(new Date()).format('YYYY-MM-DDTHH:mm'),
         type: 'return'
       },
       headers: getAuthHeader()
