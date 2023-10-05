@@ -16,6 +16,7 @@ const LentBook = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
+    const date = dayjs().format('YYYY-MM-DDTHH:mm');
 
     axios({
       method: 'post',
@@ -23,7 +24,7 @@ const LentBook = () => {
       data: {
         bookId: bookId,
         readerId: selectedUser,
-        date: dayjs(new Date()).format('YYYY-MM-DDTHH:mm'),
+        date,
         type: 'lent'
       },
       headers: getAuthHeader()

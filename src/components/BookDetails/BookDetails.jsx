@@ -12,13 +12,15 @@ const BookDetails = ({ details }) => {
   const { getAuthHeader } = useContext(AuthContext);
 
   const returnHandler = (bookId, readerId) => {
+    const date = dayjs().format('YYYY-MM-DDTHH:mm');
+
     axios({
       method: 'post',
       url: `${API_URL}/api/logs/transaction`,
       data: {
         bookId: bookId,
         readerId: readerId,
-        date: dayjs(new Date()).format('YYYY-MM-DDTHH:mm'),
+        date: date,
         type: 'return'
       },
       headers: getAuthHeader()
