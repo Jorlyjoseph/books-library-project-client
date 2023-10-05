@@ -47,3 +47,8 @@
   grid-template-columns: 1fr;
   grid-row-gap: 15px;
 }
+
+.deleteBtn {
+  color: #0d6efd;
+  cursor: pointer;
+}

@@ -91,6 +91,10 @@ const AddBooks = () => {
           <option value="Horror">Horror</option>
           <option value="Thriller">Thriller</option>
           <option value="Autobiography">Autobiography</option>
+          <option value="Classics">Classics</option>
+          <option value="Novel">Novel</option>
+          <option value="History">History</option>
+          <option value="Humor">Humor</option>
         </select>
 
         <label className="form-label">Language</label>
