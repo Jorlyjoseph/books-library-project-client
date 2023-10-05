@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import styles from './BookDetails.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import IsPrivate from '../IsPrivate/IsPrivate';
 import { AuthContext } from '../../context/auth.context';
 import { API_URL } from '../../config';

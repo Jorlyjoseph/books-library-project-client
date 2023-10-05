@@ -2,7 +2,7 @@ import axios from 'axios';
 import styles from './LentBook.module.css';
 import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import { API_URL } from '../../config';
 import { AuthContext } from '../../context/auth.context';
 
