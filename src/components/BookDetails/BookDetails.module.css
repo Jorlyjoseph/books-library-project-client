@@ -4,6 +4,7 @@
   display: grid;
   grid-template-columns: 150px 2fr 1fr;
   padding: 24px 36px;
+  margin: 20px;
 }
 
 .imgContainer {
