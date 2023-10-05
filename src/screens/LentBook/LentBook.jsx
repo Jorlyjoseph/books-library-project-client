@@ -1,7 +1,7 @@
 import axios from 'axios';
 import styles from './LentBook.module.css';
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import * as dayjs from 'dayjs';
 import { API_URL } from '../../config';
 import { AuthContext } from '../../context/auth.context';
@@ -81,9 +81,9 @@ const LentBook = () => {
         </div>
 
         <div className={styles.btnContainer}>
-          <button type="button" className="btn btn-link">
+          <Link to="/reader" className={styles.cancelBtn}>
             Cancel
-          </button>
+          </Link>
 
           <button
             type="submit"

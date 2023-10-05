@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import styles from './LoginScreen.module.css';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/auth.context';
 import { API_URL } from '../../config';
 
@@ -61,9 +61,9 @@ const LoginScreen = () => {
         </div>
 
         <div className={styles.btnContainer}>
-          <button type="button" className="btn btn-link">
+          <Link to="/" className={styles.cancelBtn}>
             Cancel
-          </button>
+          </Link>
 
           <button
             type="submit"

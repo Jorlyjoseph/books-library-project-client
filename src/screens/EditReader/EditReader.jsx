@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import styles from './EditReader.module.css';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import * as dayjs from 'dayjs';
 import { API_URL } from '../../config';
 import { AuthContext } from '../../context/auth.context';
@@ -100,9 +100,9 @@ const EditReader = () => {
         </div>
 
         <div className={styles.btnContainer}>
-          <button type="button" className="btn btn-link">
+          <Link to="/reader" className={styles.cancelBtn}>
             Cancel
-          </button>
+          </Link>
 
           <button
             type="submit"

@@ -10,6 +10,17 @@
 }
 
 .btnContainer {
+  display: grid;
+  grid-template-columns: max-content 100px;
+  grid-column-gap: 15px;
+  justify-content: right;
+  align-items: center;
   text-align: right;
   margin-top: 20px;
+}
+
+.cancelBtn {
+  width: 50px;
+  display: block;
+  text-decoration: none;
 }

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import styles from './EditBooks.module.css';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { API_URL } from '../../config';
 import { AuthContext } from '../../context/auth.context';
 
@@ -183,9 +183,9 @@ const EditBooks = () => {
         </div>
 
         <div className={styles.btnContainer}>
-          <button type="button" className="btn btn-link">
+          <Link to="/" className={styles.cancelBtn}>
             Cancel
-          </button>
+          </Link>
 
           <button
             type="submit"

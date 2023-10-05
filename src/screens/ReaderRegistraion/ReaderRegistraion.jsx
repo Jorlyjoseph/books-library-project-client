@@ -3,6 +3,7 @@ import styles from './ReaderRegistraion.module.css';
 import axios from 'axios';
 import { API_URL } from '../../config';
 import { AuthContext } from '../../context/auth.context';
+import { Link } from 'react-router-dom';
 
 const ReaderRegistration = () => {
   const [readerName, setReaderName] = useState('');
@@ -86,9 +87,9 @@ const ReaderRegistration = () => {
         </div>
 
         <div className={styles.btnContainer}>
-          <button type="button" className="btn btn-link">
+          <Link to="/" className={styles.cancelBtn}>
             Cancel
-          </button>
+          </Link>
 
           <button
             type="submit"
