@@ -27,6 +27,16 @@ const BookDetails = ({ details }) => {
     });
   };
 
+  const deleteHandler = (bookId) => {
+    axios({
+      method: 'delete',
+      url: `${API_URL}/api/books/${bookId}/remove`,
+      headers: getAuthHeader()
+    }).then(() => {
+      navigate(`/`);
+    });
+  };
+
   return (
     <div className={styles.bookDetails}>
       <div className={styles.imgContainer}>
@@ -72,8 +82,13 @@ const BookDetails = ({ details }) => {
                 <i className="bi bi-pencil-square"></i>
               </Link>
             </div>
-            <div>
-              <i className="bi bi-trash3"></i>
+            <div className={styles.deleteBtn}>
+              <i
+                className="bi bi-trash3"
+                onClick={() => {
+                  deleteHandler(details._id);
+                }}
+              ></i>
             </div>
           </IsPrivate>
         </div>

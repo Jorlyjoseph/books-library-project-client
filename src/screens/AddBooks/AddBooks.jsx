@@ -3,6 +3,7 @@ import styles from './AddBooks.module.css';
 import axios from 'axios';
 import { API_URL } from '../../config';
 import { AuthContext } from '../../context/auth.context';
+import { Link } from 'react-router-dom';
 
 const AddBooks = () => {
   const [language, setLanguage] = useState('DEFAULT');
@@ -91,6 +92,10 @@ const AddBooks = () => {
           <option value="Horror">Horror</option>
           <option value="Thriller">Thriller</option>
           <option value="Autobiography">Autobiography</option>
+          <option value="Classics">Classics</option>
+          <option value="Novel">Novel</option>
+          <option value="History">History</option>
+          <option value="Humor">Humor</option>
         </select>
 
         <label className="form-label">Language</label>
@@ -171,9 +176,9 @@ const AddBooks = () => {
         </div>
 
         <div className={styles.btnContainer}>
-          <button type="button" className="btn btn-link">
+          <Link to="/" className={styles.cancelBtn}>
             Cancel
-          </button>
+          </Link>
 
           <button
             type="submit"

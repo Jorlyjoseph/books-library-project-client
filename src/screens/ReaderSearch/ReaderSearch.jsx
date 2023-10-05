@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/auth.context';
 import { API_URL } from '../../config';
+import * as dayjs from 'dayjs';
 
 const ReaderSearch = () => {
   const navigate = useNavigate();
@@ -76,7 +77,11 @@ const ReaderSearch = () => {
 
                   <div className={styles.valuePair}>
                     <div className={styles.label}>Started</div>
-                    <div>{reader.registration_date}</div>
+                    <div>
+                      {dayjs(reader.registration_date).format(
+                        'DD MMM YYYY @ HH:mm'
+                      )}
+                    </div>
                   </div>
 
                   <div className={styles.valuePair}>
