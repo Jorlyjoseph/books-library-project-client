@@ -3,6 +3,9 @@ import styles from './Home.module.css';
 import axios from 'axios';
 import BookDetails from '../../components/BookDetails/BookDetails';
 import { API_URL } from '../../config';
+import { toast } from 'react-toastify';
+
+const errorNotify = () => toast.error('Something went wrong!');
 
 const Home = () => {
   const [query, setQuery] = useState('');
@@ -19,9 +22,13 @@ const Home = () => {
         query: query,
         category: category
       }
-    }).then((books) => {
-      setBookList(books.data);
-    });
+    })
+      .then((books) => {
+        setBookList(books.data);
+      })
+      .catch(() => {
+        errorNotify();
+      });
   };
 
   return (

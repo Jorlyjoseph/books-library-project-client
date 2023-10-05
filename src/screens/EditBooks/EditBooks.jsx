@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { API_URL } from '../../config';
 import { AuthContext } from '../../context/auth.context';
+import { errorNotify, successNotify } from '../../components/Toast/Toast';
 
 const EditBooks = () => {
   const { bookId } = useParams();
@@ -55,9 +56,14 @@ const EditBooks = () => {
         published: published
       },
       headers: getAuthHeader()
-    }).then(() => {
-      navigate('/');
-    });
+    })
+      .then(() => {
+        successNotify('Book updated');
+        navigate('/');
+      })
+      .catch(() => {
+        errorNotify('Book update failed');
+      });
   };
 
   return (
