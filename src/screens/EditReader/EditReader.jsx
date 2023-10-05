@@ -24,8 +24,8 @@ const EditReader = () => {
     }).then(({ data }) => {
       setReaderName(data.name);
       setEmail(data.email);
-      setDob(dayjs(data.dob).format('YYYY-MM-DD'));
-      setDoj(dayjs(data.registration_date).format('YYYY-MM-DD'));
+      setDob(data.dob);
+      setDoj(data.registration_date);
     });
   }, []);
 
@@ -74,7 +74,7 @@ const EditReader = () => {
           <input
             type="date"
             className="form-control"
-            value={dob}
+            value={dayjs(dob).format('YYYY-MM-DD')}
             onChange={(event) => {
               setDob(event.target.value);
             }}
@@ -86,7 +86,7 @@ const EditReader = () => {
           <input
             type="date"
             className="form-control"
-            value={doj}
+            value={dayjs(doj).format('YYYY-MM-DD')}
             onChange={(event) => {
               setDoj(event.target.value);
             }}
