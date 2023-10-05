@@ -2,6 +2,11 @@
   margin: 150px;
 }
 
+.header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
 .searchContainer {
   margin-bottom: 30px;
   display: grid;

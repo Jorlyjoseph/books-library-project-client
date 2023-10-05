@@ -34,6 +34,10 @@ const Home = () => {
   return (
     <form onSubmit={submitHandler}>
       <div className={styles.container}>
+        <div>
+          <h1 className={styles.header}>Oracle Book Library</h1>
+        </div>
+
         <div className={styles.searchContainer}>
           <div className={styles.searchBox}>
             <div className="input-group input-group-lg">
@@ -48,6 +52,7 @@ const Home = () => {
                   setQuery(event.target.value);
                 }}
                 value={query}
+                placeholder="Search Book"
               />
             </div>
           </div>
