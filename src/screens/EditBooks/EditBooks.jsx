@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styles from './EditBooks.module.css';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import { API_URL } from '../../config';
+import { AuthContext } from '../../context/auth.context';
 
 const EditBooks = () => {
   const { bookId } = useParams();
@@ -15,11 +17,13 @@ const EditBooks = () => {
   const [bookDescription, setBookDescription] = useState('');
   const [isbn, setIsbn] = useState('');
   const [published, setPublished] = useState('');
+  const { getAuthHeader } = useContext(AuthContext);
 
   useEffect(() => {
     axios({
       method: 'get',
-      url: `http://localhost:5005/api/books/${bookId}`
+      url: `${API_URL}/api/books/${bookId}`,
+      headers: getAuthHeader()
     }).then(({ data }) => {
       setLanguage(data.language);
       setCategory(data.catagory);
@@ -38,7 +42,7 @@ const EditBooks = () => {
 
     axios({
       method: 'put',
-      url: `http://localhost:5005/api/books/${bookId}`,
+      url: `${API_URL}/api/books/${bookId}`,
       data: {
         title: bookTitle,
         author: bookAuthor,
@@ -49,7 +53,8 @@ const EditBooks = () => {
         description: bookDescription,
         isbn: isbn,
         published: published
-      }
+      },
+      headers: getAuthHeader()
     }).then(() => {
       navigate('/');
     });
@@ -97,6 +102,7 @@ const EditBooks = () => {
           <option value="Fiction">Fiction</option>
           <option value="Romance">Romance</option>
           <option value="Horror">Horror</option>
+          <option value="Philosophy">Philosophy</option>
         </select>
 
         <label className="form-label">Language</label>

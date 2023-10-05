@@ -3,6 +3,7 @@ import styles from './ReaderSearch.module.css';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/auth.context';
+import { API_URL } from '../../config';
 
 const ReaderSearch = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const ReaderSearch = () => {
 
     axios({
       method: 'get',
-      url: `http://localhost:5005/api/readers/search/`,
+      url: `${API_URL}/api/readers/search/`,
       params: {
         query: query
       },
@@ -29,10 +30,11 @@ const ReaderSearch = () => {
   const actionHandler = (readerId, active) => {
     axios({
       method: 'put',
-      url: `http://localhost:5005/api/readers/${readerId}`,
+      url: `${API_URL}/api/readers/${readerId}`,
       data: {
         active: active
-      }
+      },
+      headers: getAuthHeader()
     }).then(() => {
       navigate('/');
     });

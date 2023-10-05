@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styles from './AddBooks.module.css';
 import axios from 'axios';
 import { API_URL } from '../../config';
+import { AuthContext } from '../../context/auth.context';
 
 const AddBooks = () => {
   const [language, setLanguage] = useState('DEFAULT');
@@ -13,6 +14,7 @@ const AddBooks = () => {
   const [bookDescription, setBookDescription] = useState('');
   const [isbn, setIsbn] = useState('');
   const [published, setPublished] = useState('');
+  const { getAuthHeader } = useContext(AuthContext);
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -30,7 +32,8 @@ const AddBooks = () => {
         description: bookDescription,
         isbn: isbn,
         published: published
-      }
+      },
+      headers: getAuthHeader()
     }).then(() => {
       setBookTitle('');
       setBookAuthor('');
