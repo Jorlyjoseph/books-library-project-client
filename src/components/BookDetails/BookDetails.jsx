@@ -63,7 +63,7 @@ const BookDetails = ({ details }) => {
         </div>
         <div className={styles.info}>
           <div className={styles.label}>Published</div>
-          <div>{details.published}</div>
+          <div>{dayjs(details.published).format('YYYY')}</div>
         </div>
         <div className={styles.info}>
           <div className={styles.label}>Reader</div>
