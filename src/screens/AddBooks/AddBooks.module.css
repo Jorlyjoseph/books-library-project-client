@@ -1,12 +1,30 @@
 .container {
   width: 40%;
-  margin: 0 auto;
-  margin-top: 50px;
+  margin: 100px auto 0 auto;
 }
-/* .btnContainer {
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.formContainer {
+  border-radius: 10px;
+  padding: 30px 30px 20px 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.valuePair {
+  display: grid;
+  grid-template-columns: 100px auto;
+  grid-column-gap: 30px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.valuePair label {
   text-align: right;
-  margin-top: 20px;
-} */
+}
 
 .btnContainer {
   display: grid;
