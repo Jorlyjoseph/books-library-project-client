@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/auth.context';
 import { API_URL } from '../../config';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 
 const ReaderSearch = () => {
   const navigate = useNavigate();
