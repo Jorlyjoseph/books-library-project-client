@@ -1,0 +1,54 @@
+.bookDetails {
+  border-radius: 5px;
+  border: 1px solid rgba(55, 41, 41, 0.2);
+  display: grid;
+  grid-template-columns: 150px 2fr 1fr;
+  padding: 24px 36px;
+  margin: 20px;
+}
+
+.imgContainer {
+  height: 150px;
+}
+
+.image {
+  height: 100%;
+}
+
+.detailsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-row-gap: 5px;
+}
+
+.info {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-column-gap: 5px;
+}
+
+.label {
+  font-weight: 600;
+}
+
+.actionContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.userActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: end;
+}
+
+.bookActions {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 15px;
+}
+
+.deleteBtn {
+  color: #0d6efd;
+  cursor: pointer;
+}

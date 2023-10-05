@@ -1,0 +1,16 @@
+.login {
+  position: absolute;
+  right: 50px;
+}
+
+.loginLink {
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.logoutBtn {
+  background: transparent;
+  border: 0;
+  font-weight: 600;
+}

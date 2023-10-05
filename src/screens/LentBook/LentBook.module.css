@@ -1,0 +1,40 @@
+.container {
+  width: 60%;
+  margin: 100px auto 20px auto;
+  max-width: 550px;
+}
+
+.title {
+  margin-bottom: 30px;
+}
+
+.innerContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 30px;
+}
+
+.nameValuePair {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+}
+
+.label {
+  font-weight: 600;
+}
+
+.btnContainer {
+  display: grid;
+  grid-template-columns: max-content 100px;
+  grid-column-gap: 15px;
+  justify-content: right;
+  align-items: center;
+  text-align: right;
+  margin-top: 20px;
+}
+
+.cancelBtn {
+  width: 50px;
+  display: block;
+  text-decoration: none;
+}

@@ -1,0 +1,26 @@
+.container {
+  margin: 0 auto;
+  min-width: 400px;
+  max-width: 600px;
+  margin-top: 50px;
+}
+
+.header {
+  margin-bottom: 40px;
+}
+
+.btnContainer {
+  display: grid;
+  grid-template-columns: max-content 100px;
+  grid-column-gap: 15px;
+  justify-content: right;
+  align-items: center;
+  text-align: right;
+  margin-top: 20px;
+}
+
+.cancelBtn {
+  width: 50px;
+  display: block;
+  text-decoration: none;
+}
