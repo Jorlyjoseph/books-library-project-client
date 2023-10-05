@@ -142,7 +142,7 @@ const AddBooks = () => {
         <div className="mb-3">
           <label className="form-label">Published</label>
           <input
-            type="text"
+            type="date"
             className="form-control"
             value={published}
             onChange={(event) => {

@@ -5,6 +5,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { API_URL } from '../../config';
 import { AuthContext } from '../../context/auth.context';
+import { errorNotify, successNotify } from '../../components/Toast/Toast';
 
 const EditReader = () => {
   const navigate = useNavigate();
@@ -41,9 +42,14 @@ const EditReader = () => {
         registrationDate: doj
       },
       headers: getAuthHeader()
-    }).then(() => {
-      navigate('/');
-    });
+    })
+      .then(() => {
+        successNotify('Reader Updated');
+        navigate('/');
+      })
+      .catch(() => {
+        errorNotify('Reader Update failed');
+      });
   };
 
   return (

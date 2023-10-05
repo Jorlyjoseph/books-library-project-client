@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import IsPrivate from '../IsPrivate/IsPrivate';
 import { AuthContext } from '../../context/auth.context';
 import { API_URL } from '../../config';
+import { errorNotify, successNotify } from '../Toast/Toast';
 
 const BookDetails = ({ details }) => {
   const navigate = useNavigate();
@@ -24,9 +25,14 @@ const BookDetails = ({ details }) => {
         type: 'return'
       },
       headers: getAuthHeader()
-    }).then(() => {
-      navigate(`/book/${bookId}/history`);
-    });
+    })
+      .then(() => {
+        successNotify('Book return success');
+        navigate(`/book/${bookId}/history`);
+      })
+      .catch(() => {
+        errorNotify('Book return failed');
+      });
   };
 
   const deleteHandler = (bookId) => {
@@ -63,7 +69,7 @@ const BookDetails = ({ details }) => {
         </div>
         <div className={styles.info}>
           <div className={styles.label}>Published</div>
-          <div>{details.published}</div>
+          <div>{dayjs(details.published).format('YYYY')}</div>
         </div>
         <div className={styles.info}>
           <div className={styles.label}>Reader</div>

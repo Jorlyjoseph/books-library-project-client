@@ -4,6 +4,9 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/auth.context';
 import { API_URL } from '../../config';
+import { toast } from 'react-toastify';
+
+const errorNotify = (msg) => toast.error(msg);
 
 const LoginScreen = () => {
   const navigate = useNavigate();
@@ -21,11 +24,15 @@ const LoginScreen = () => {
         email: email,
         password: password
       }
-    }).then(({ data }) => {
-      storeToken(data.authToken);
-      authenticateUser();
-      navigate('/');
-    });
+    })
+      .then(({ data }) => {
+        storeToken(data.authToken);
+        authenticateUser();
+        navigate('/');
+      })
+      .catch((err) => {
+        errorNotify(err.response.data.message);
+      });
   };
 
   return (

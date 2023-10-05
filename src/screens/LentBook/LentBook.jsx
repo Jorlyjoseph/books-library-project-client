@@ -5,6 +5,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { API_URL } from '../../config';
 import { AuthContext } from '../../context/auth.context';
+import { errorNotify, successNotify } from '../../components/Toast/Toast';
 
 const LentBook = () => {
   const navigate = useNavigate();
@@ -28,9 +29,14 @@ const LentBook = () => {
         type: 'lent'
       },
       headers: getAuthHeader()
-    }).then(() => {
-      navigate(`/book/${bookId}/history`);
-    });
+    })
+      .then(() => {
+        successNotify('Book lent success');
+        navigate(`/book/${bookId}/history`);
+      })
+      .catch(() => {
+        errorNotify('Book lent failed');
+      });
   };
 
   useEffect(() => {

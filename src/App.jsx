@@ -13,9 +13,23 @@ import Home from './screens/Home/Home';
 import EditReader from './screens/EditReader/EditReader';
 import IsPrivateScreen from './components/IsPrivate/IsPrivateScreen';
 
+import { ToastContainer } from 'react-toastify';
+
 function App() {
   return (
     <div>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <Navbar />
       <Routes>
         <Route
