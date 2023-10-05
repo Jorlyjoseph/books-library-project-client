@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/auth.context';
 import { API_URL } from '../../config';
 import dayjs from 'dayjs';
+import { errorNotify, successNotify } from '../../components/Toast/Toast';
 
 const ReaderSearch = () => {
   const navigate = useNavigate();
@@ -36,9 +37,22 @@ const ReaderSearch = () => {
         active: active
       },
       headers: getAuthHeader()
-    }).then(() => {
-      navigate('/');
-    });
+    })
+      .then(() => {
+        if (active) {
+          successNotify('Reader activated');
+        } else {
+          successNotify('Reader deactivated');
+        }
+        navigate('/');
+      })
+      .catch(() => {
+        if (active) {
+          errorNotify('Reader activation failed');
+        } else {
+          errorNotify('Reader deactivation failed');
+        }
+      });
   };
 
   return (
