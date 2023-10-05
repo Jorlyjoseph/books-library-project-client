@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-const API_URL = 'http://localhost:5005';
+import { API_URL } from '../config';
 
 const AuthContext = React.createContext();
 
@@ -14,6 +14,10 @@ function AuthProviderWrapper(props) {
 
   const removeToken = () => {
     localStorage.removeItem('authToken');
+  };
+
+  const getToken = () => {
+    return localStorage.getItem('authToken');
   };
 
   const authenticateUser = () => {
@@ -49,6 +53,10 @@ function AuthProviderWrapper(props) {
     authenticateUser();
   };
 
+  const getAuthHeader = () => {
+    return { Authorization: `Bearer ${getToken()}` };
+  };
+
   useEffect(() => {
     authenticateUser();
   }, []);
@@ -62,7 +70,8 @@ function AuthProviderWrapper(props) {
         storeToken,
         authenticateUser,
         logOutUser,
-        removeToken
+        removeToken,
+        getAuthHeader
       }}
     >
       {props.children}

@@ -3,6 +3,7 @@ import styles from './LoginScreen.module.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/auth.context';
+import { API_URL } from '../../config';
 
 const LoginScreen = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const LoginScreen = () => {
 
     axios({
       method: 'post',
-      url: `http://localhost:5005/api/auth/login`,
+      url: `${API_URL}/api/auth/login`,
       data: {
         email: email,
         password: password

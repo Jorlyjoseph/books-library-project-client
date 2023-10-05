@@ -1,25 +1,29 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styles from './ReaderRegistraion.module.css';
 import axios from 'axios';
+import { API_URL } from '../../config';
+import { AuthContext } from '../../context/auth.context';
 
 const ReaderRegistration = () => {
   const [readerName, setReaderName] = useState('');
   const [email, setEmail] = useState('');
   const [dob, setDob] = useState('');
   const [doj, setDoj] = useState('');
+  const { getAuthHeader } = useContext(AuthContext);
 
   const submitHandler = (event) => {
     event.preventDefault();
 
     axios({
       method: 'post',
-      url: `http://localhost:5005/api/readers/create`,
+      url: `${API_URL}/api/readers/create`,
       data: {
         name: readerName,
         dob: dob,
         email: email,
         registrationDate: doj
-      }
+      },
+      headers: getAuthHeader()
     }).then(() => {
       setReaderName('');
       setEmail('');

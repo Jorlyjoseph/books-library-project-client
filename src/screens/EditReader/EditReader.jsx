@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styles from './EditReader.module.css';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as dayjs from 'dayjs';
+import { API_URL } from '../../config';
+import { AuthContext } from '../../context/auth.context';
 
 const EditReader = () => {
   const navigate = useNavigate();
@@ -11,11 +13,13 @@ const EditReader = () => {
   const [email, setEmail] = useState('');
   const [dob, setDob] = useState('');
   const [doj, setDoj] = useState('');
+  const { getAuthHeader } = useContext(AuthContext);
 
   useEffect(() => {
     axios({
       method: 'get',
-      url: `http://localhost:5005/api/readers/${readerId}`
+      url: `${API_URL}/api/readers/${readerId}`,
+      headers: getAuthHeader()
     }).then(({ data }) => {
       setReaderName(data.name);
       setEmail(data.email);
@@ -29,13 +33,14 @@ const EditReader = () => {
 
     axios({
       method: 'put',
-      url: `http://localhost:5005/api/readers/${readerId}`,
+      url: `${API_URL}/api/readers/${readerId}`,
       data: {
         name: readerName,
         dob: dob,
         email: email,
         registrationDate: doj
-      }
+      },
+      headers: getAuthHeader()
     }).then(() => {
       navigate('/');
     });

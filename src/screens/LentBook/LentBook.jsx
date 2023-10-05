@@ -1,8 +1,10 @@
 import axios from 'axios';
 import styles from './LentBook.module.css';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as dayjs from 'dayjs';
+import { API_URL } from '../../config';
+import { AuthContext } from '../../context/auth.context';
 
 const LentBook = () => {
   const navigate = useNavigate();
@@ -10,19 +12,21 @@ const LentBook = () => {
   const [details, setDetails] = useState({});
   const [readers, setReaders] = useState([]);
   const [selectedUser, setSelectedUser] = useState('');
+  const { getAuthHeader } = useContext(AuthContext);
 
   const submitHandler = (event) => {
     event.preventDefault();
 
     axios({
       method: 'post',
-      url: `http://localhost:5005/api/logs/transaction`,
+      url: `${API_URL}/api/logs/transaction`,
       data: {
         bookId: bookId,
         readerId: selectedUser,
         date: dayjs().format('YYYY-MM-DDTHH:mm'),
         type: 'lent'
-      }
+      },
+      headers: getAuthHeader()
     }).then(() => {
       navigate(`/book/${bookId}/history`);
     });
@@ -31,14 +35,16 @@ const LentBook = () => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `http://localhost:5005/api/readers`
+      url: `${API_URL}/api/readers`,
+      headers: getAuthHeader()
     }).then((bookReaders) => {
       setReaders(bookReaders.data);
     });
 
     axios({
       method: 'get',
-      url: `http://localhost:5005/api/books/${bookId}`
+      url: `${API_URL}/api/books/${bookId}`,
+      headers: getAuthHeader()
     }).then((bookDetails) => {
       setDetails(bookDetails.data);
     });

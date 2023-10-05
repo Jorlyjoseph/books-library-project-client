@@ -18,11 +18,46 @@ function App() {
     <div>
       <Navbar />
       <Routes>
-        <Route path="/reader/new" element={<ReaderRegistration />} />
-        <Route path="/book/:bookId/history" element={<BookHistory />} />
-        <Route path="/book/new" element={<AddBooks />} />
-        <Route path="/book/:bookId/edit" element={<EditBooks />} />
-        <Route path="/book/:bookId/lent" element={<LentBook />} />
+        <Route
+          path="/reader/new"
+          element={
+            <IsPrivateScreen>
+              <ReaderRegistration />
+            </IsPrivateScreen>
+          }
+        />
+        <Route
+          path="/book/:bookId/history"
+          element={
+            <IsPrivateScreen>
+              <BookHistory />
+            </IsPrivateScreen>
+          }
+        />
+        <Route
+          path="/book/new"
+          element={
+            <IsPrivateScreen>
+              <AddBooks />
+            </IsPrivateScreen>
+          }
+        />
+        <Route
+          path="/book/:bookId/edit"
+          element={
+            <IsPrivateScreen>
+              <EditBooks />
+            </IsPrivateScreen>
+          }
+        />
+        <Route
+          path="/book/:bookId/lent"
+          element={
+            <IsPrivateScreen>
+              <LentBook />
+            </IsPrivateScreen>
+          }
+        />
         <Route
           path="/reader"
           element={
@@ -31,7 +66,14 @@ function App() {
             </IsPrivateScreen>
           }
         />
-        <Route path="/reader/:readerId/edit" element={<EditReader />} />
+        <Route
+          path="/reader/:readerId/edit"
+          element={
+            <IsPrivateScreen>
+              <EditReader />
+            </IsPrivateScreen>
+          }
+        />
         <Route path="/login" element={<LoginScreen />} />
         <Route path="/" element={<Home />} />
       </Routes>
