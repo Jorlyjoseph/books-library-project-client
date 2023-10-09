@@ -4,7 +4,8 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/auth.context';
 import { API_URL } from '../../config';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
+import { errorNotify, successNotify } from '../../components/Toast/Toast';
 
 const ReaderSearch = () => {
   const navigate = useNavigate();
@@ -36,13 +37,29 @@ const ReaderSearch = () => {
         active: active
       },
       headers: getAuthHeader()
-    }).then(() => {
-      navigate('/');
-    });
+    })
+      .then(() => {
+        if (active) {
+          successNotify('Reader activated');
+        } else {
+          successNotify('Reader deactivated');
+        }
+        navigate('/');
+      })
+      .catch(() => {
+        if (active) {
+          errorNotify('Reader activation failed');
+        } else {
+          errorNotify('Reader deactivation failed');
+        }
+      });
   };
 
   return (
     <div className={styles.container}>
+      <div>
+        <h2 className={styles.header}>Reader Search</h2>
+      </div>
       <form onSubmit={submitHandler}>
         <div className={styles.searchContainer}>
           <div className={styles.searchBox}>
@@ -64,66 +81,64 @@ const ReaderSearch = () => {
         </div>
       </form>
 
-      <div>
-        <div className={styles.readerListContainer}>
-          {readerList.length > 0 &&
-            readerList.map((reader) => (
-              <div key={reader._id} className={styles.readerBox}>
-                <div className={styles.leftContainer}>
-                  <div className={styles.valuePair}>
-                    <div className={styles.label}>Name</div>
-                    <div>{reader.name}</div>
-                  </div>
+      <div className={styles.readerListContainer}>
+        {readerList.length > 0 &&
+          readerList.map((reader) => (
+            <div key={reader._id} className={styles.readerBox}>
+              <div className={styles.leftContainer}>
+                <div className={styles.valuePair}>
+                  <div className={styles.label}>Name</div>
+                  <div>{reader.name}</div>
+                </div>
 
-                  <div className={styles.valuePair}>
-                    <div className={styles.label}>Started</div>
-                    <div>
-                      {dayjs(reader.registration_date).format(
-                        'DD MMM YYYY @ HH:mm'
-                      )}
-                    </div>
-                  </div>
-
-                  <div className={styles.valuePair}>
-                    <div className={styles.label}>Status</div>
-                    {reader.active === true ? (
-                      <span className="badge text-bg-success">Active</span>
-                    ) : (
-                      <span className="badge text-bg-danger">Inactive</span>
+                <div className={styles.valuePair}>
+                  <div className={styles.label}>Started</div>
+                  <div>
+                    {dayjs(reader.registration_date).format(
+                      'DD MMM YYYY @ HH:mm'
                     )}
                   </div>
                 </div>
 
-                <div className={styles.rightContainer}>
-                  <div>
-                    {reader.active === true ? (
-                      <button
-                        type="submit"
-                        className="btn btn-primary"
-                        onClick={() => actionHandler(reader._id, false)}
-                      >
-                        Deactivate
-                      </button>
-                    ) : (
-                      <button
-                        type="submit"
-                        className="btn btn-primary"
-                        onClick={() => actionHandler(reader._id, true)}
-                      >
-                        Activate
-                      </button>
-                    )}
-                  </div>
-
-                  <div>
-                    <Link to={`/reader/${reader._id}/edit`}>
-                      <i className="bi bi-pencil-square"></i>
-                    </Link>
-                  </div>
+                <div className={styles.valuePair}>
+                  <div className={styles.label}>Status</div>
+                  {reader.active === true ? (
+                    <span className="badge text-bg-success">Active</span>
+                  ) : (
+                    <span className="badge text-bg-danger">Inactive</span>
+                  )}
                 </div>
               </div>
-            ))}
-        </div>
+
+              <div className={styles.rightContainer}>
+                <div>
+                  {reader.active === true ? (
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                      onClick={() => actionHandler(reader._id, false)}
+                    >
+                      Deactivate
+                    </button>
+                  ) : (
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                      onClick={() => actionHandler(reader._id, true)}
+                    >
+                      Activate
+                    </button>
+                  )}
+                </div>
+
+                <div>
+                  <Link to={`/reader/${reader._id}/edit`}>
+                    <i className="bi bi-pencil-square"></i>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ))}
       </div>
     </div>
   );

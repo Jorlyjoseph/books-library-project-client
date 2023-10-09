@@ -1,9 +1,13 @@
 .container {
-  margin: 0 20px;
+  margin: 100px 100px;
 }
 
 .bookLogsContainer {
-  margin-top: 20px;
+  margin: 20px 30px;
+  background-color: #ececec;
+  border-radius: 10px;
+  box-shadow: 3px 5px 8px 1px rgba(0, 0, 0, 0.2),
+    0 2px 2px 0 rgba(0, 0, 0, 0.19);
 }
 
 .bookLogs {
@@ -18,4 +22,8 @@
 .info {
   display: grid;
   grid-template-columns: 75px 1fr;
+}
+
+.label {
+  font-weight: 600;
 }

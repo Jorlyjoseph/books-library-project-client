@@ -3,7 +3,7 @@ import styles from './BookHistory.module.css';
 import BookDetails from '../../components/BookDetails/BookDetails';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import { API_URL } from '../../config';
 import { AuthContext } from '../../context/auth.context';
 

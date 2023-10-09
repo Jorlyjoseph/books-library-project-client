@@ -4,6 +4,7 @@ import axios from 'axios';
 import { API_URL } from '../../config';
 import { AuthContext } from '../../context/auth.context';
 import { Link } from 'react-router-dom';
+import { errorNotify, successNotify } from '../../components/Toast/Toast';
 
 const AddBooks = () => {
   const [language, setLanguage] = useState('DEFAULT');
@@ -35,24 +36,31 @@ const AddBooks = () => {
         published: published
       },
       headers: getAuthHeader()
-    }).then(() => {
-      setBookTitle('');
-      setBookAuthor('');
-      setCategory('');
-      setLanguage('');
-      setBookLocation('');
-      setImageUrl('');
-      setBookDescription('');
-      setIsbn('');
-      setPublished('');
-    });
+    })
+      .then(() => {
+        setBookTitle('');
+        setBookAuthor('');
+        setCategory('');
+        setLanguage('');
+        setBookLocation('');
+        setImageUrl('');
+        setBookDescription('');
+        setIsbn('');
+        setPublished('');
+        successNotify('Book added');
+      })
+      .catch(() => {
+        errorNotify('Book adding faild');
+      });
   };
 
   return (
     <div className={styles.container}>
-      <h2>Add books</h2>
-      <form onSubmit={submitHandler}>
-        <div className="mb-3">
+      <div>
+        <h2 className={styles.header}>Add books</h2>
+      </div>
+      <form onSubmit={submitHandler} className={styles.formContainer}>
+        <div className={styles.valuePair}>
           <label className="form-label">Title</label>
           <input
             type="text"
@@ -64,7 +72,7 @@ const AddBooks = () => {
           />
         </div>
 
-        <div className="mb-3">
+        <div className={styles.valuePair}>
           <label className="form-label">Author</label>
           <input
             type="text"
@@ -76,46 +84,50 @@ const AddBooks = () => {
           />
         </div>
 
-        <label className="form-label">Category</label>
-        <select
-          className="form-select mb-3"
-          onChange={(event) => {
-            setCategory(event.target.value);
-          }}
-          value={category}
-        >
-          <option value="DEFAULT" disabled>
-            Please Select
-          </option>
-          <option value="Fiction">Fiction</option>
-          <option value="Romance">Romance</option>
-          <option value="Horror">Horror</option>
-          <option value="Thriller">Thriller</option>
-          <option value="Autobiography">Autobiography</option>
-          <option value="Classics">Classics</option>
-          <option value="Novel">Novel</option>
-          <option value="History">History</option>
-          <option value="Humor">Humor</option>
-        </select>
+        <div className={styles.valuePair}>
+          <label className="form-label">Category</label>
+          <select
+            className="form-select"
+            onChange={(event) => {
+              setCategory(event.target.value);
+            }}
+            value={category}
+          >
+            <option value="DEFAULT" disabled>
+              Please Select
+            </option>
+            <option value="Fiction">Fiction</option>
+            <option value="Romance">Romance</option>
+            <option value="Horror">Horror</option>
+            <option value="Thriller">Thriller</option>
+            <option value="Autobiography">Autobiography</option>
+            <option value="Classics">Classics</option>
+            <option value="Novel">Novel</option>
+            <option value="History">History</option>
+            <option value="Humor">Humor</option>
+          </select>
+        </div>
 
-        <label className="form-label">Language</label>
-        <select
-          className="form-select mb-3"
-          onChange={(event) => {
-            setLanguage(event.target.value);
-          }}
-          value={language}
-        >
-          <option value="DEFAULT" disabled>
-            Please Select
-          </option>
-          <option value="English">English</option>
-          <option value="German">German</option>
-          <option value="Hindi">Hindi</option>
-          <option value="Malayalam">Malayalam</option>
-        </select>
+        <div className={styles.valuePair}>
+          <label className="form-label">Language</label>
+          <select
+            className="form-select"
+            onChange={(event) => {
+              setLanguage(event.target.value);
+            }}
+            value={language}
+          >
+            <option value="DEFAULT" disabled>
+              Please Select
+            </option>
+            <option value="English">English</option>
+            <option value="German">German</option>
+            <option value="Hindi">Hindi</option>
+            <option value="Malayalam">Malayalam</option>
+          </select>
+        </div>
 
-        <div className="mb-3">
+        <div className={styles.valuePair}>
           <label className="form-label">Location</label>
           <input
             type="text"
@@ -127,7 +139,7 @@ const AddBooks = () => {
           />
         </div>
 
-        <div className="mb-3">
+        <div className={styles.valuePair}>
           <label className="form-label">ISBN Num</label>
           <input
             type="text"
@@ -139,10 +151,10 @@ const AddBooks = () => {
           />
         </div>
 
-        <div className="mb-3">
+        <div className={styles.valuePair}>
           <label className="form-label">Published</label>
           <input
-            type="text"
+            type="date"
             className="form-control"
             value={published}
             onChange={(event) => {
@@ -151,7 +163,7 @@ const AddBooks = () => {
           />
         </div>
 
-        <div className="mb-3">
+        <div className={styles.valuePair}>
           <label className="form-label">Image</label>
           <input
             type="text"
@@ -163,7 +175,7 @@ const AddBooks = () => {
           />
         </div>
 
-        <div className="mb-3">
+        <div className={styles.valuePair}>
           <label className="form-label">Description</label>
           <textarea
             className="form-control"

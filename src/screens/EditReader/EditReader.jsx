@@ -2,9 +2,10 @@ import { useContext, useEffect, useState } from 'react';
 import styles from './EditReader.module.css';
 import axios from 'axios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import { API_URL } from '../../config';
 import { AuthContext } from '../../context/auth.context';
+import { errorNotify, successNotify } from '../../components/Toast/Toast';
 
 const EditReader = () => {
   const navigate = useNavigate();
@@ -23,8 +24,8 @@ const EditReader = () => {
     }).then(({ data }) => {
       setReaderName(data.name);
       setEmail(data.email);
-      setDob(dayjs(data.dob).format('YYYY-MM-DD'));
-      setDoj(dayjs(data.registration_date).format('YYYY-MM-DD'));
+      setDob(data.dob);
+      setDoj(data.registration_date);
     });
   }, []);
 
@@ -41,9 +42,14 @@ const EditReader = () => {
         registrationDate: doj
       },
       headers: getAuthHeader()
-    }).then(() => {
-      navigate('/');
-    });
+    })
+      .then(() => {
+        successNotify('Reader Updated');
+        navigate('/');
+      })
+      .catch(() => {
+        errorNotify('Reader Update failed');
+      });
   };
 
   return (
@@ -68,7 +74,7 @@ const EditReader = () => {
           <input
             type="date"
             className="form-control"
-            value={dob}
+            value={dayjs(dob).format('YYYY-MM-DD')}
             onChange={(event) => {
               setDob(event.target.value);
             }}
@@ -80,7 +86,7 @@ const EditReader = () => {
           <input
             type="date"
             className="form-control"
-            value={doj}
+            value={dayjs(doj).format('YYYY-MM-DD')}
             onChange={(event) => {
               setDoj(event.target.value);
             }}

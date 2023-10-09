@@ -2,29 +2,40 @@ import React, { useContext } from 'react';
 import styles from './BookDetails.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import IsPrivate from '../IsPrivate/IsPrivate';
 import { AuthContext } from '../../context/auth.context';
 import { API_URL } from '../../config';
+import { errorNotify, successNotify } from '../Toast/Toast';
 
 const BookDetails = ({ details }) => {
   const navigate = useNavigate();
   const { getAuthHeader } = useContext(AuthContext);
 
   const returnHandler = (bookId, readerId) => {
+    const date = dayjs().format('YYYY-MM-DDTHH:mm');
+
     axios({
       method: 'post',
       url: `${API_URL}/api/logs/transaction`,
       data: {
         bookId: bookId,
         readerId: readerId,
-        date: dayjs().format('YYYY-MM-DDTHH:mm'),
+        date: date,
         type: 'return'
       },
       headers: getAuthHeader()
-    }).then(() => {
-      navigate(`/book/${bookId}/history`);
-    });
+    })
+      .then(() => {
+        successNotify('Book return success');
+
+        // for reloading the same page
+        navigate(`/temp`);
+        navigate(-1);
+      })
+      .catch(() => {
+        errorNotify('Book return failed');
+      });
   };
 
   const deleteHandler = (bookId) => {
@@ -32,9 +43,14 @@ const BookDetails = ({ details }) => {
       method: 'delete',
       url: `${API_URL}/api/books/${bookId}/remove`,
       headers: getAuthHeader()
-    }).then(() => {
-      navigate(`/`);
-    });
+    })
+      .then(() => {
+        successNotify('Book delete success');
+        navigate(`/`);
+      })
+      .catch(() => {
+        errorNotify('Book delete failed');
+      });
   };
 
   return (
@@ -61,7 +77,7 @@ const BookDetails = ({ details }) => {
         </div>
         <div className={styles.info}>
           <div className={styles.label}>Published</div>
-          <div>{details.published}</div>
+          <div>{dayjs(details.published).format('YYYY')}</div>
         </div>
         <div className={styles.info}>
           <div className={styles.label}>Reader</div>

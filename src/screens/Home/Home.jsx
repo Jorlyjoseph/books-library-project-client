@@ -3,6 +3,9 @@ import styles from './Home.module.css';
 import axios from 'axios';
 import BookDetails from '../../components/BookDetails/BookDetails';
 import { API_URL } from '../../config';
+import { toast } from 'react-toastify';
+
+const errorNotify = () => toast.error('Something went wrong!');
 
 const Home = () => {
   const [query, setQuery] = useState('');
@@ -19,14 +22,22 @@ const Home = () => {
         query: query,
         category: category
       }
-    }).then((books) => {
-      setBookList(books.data);
-    });
+    })
+      .then((books) => {
+        setBookList(books.data);
+      })
+      .catch(() => {
+        errorNotify();
+      });
   };
 
   return (
     <form onSubmit={submitHandler}>
       <div className={styles.container}>
+        <div>
+          <h1 className={styles.header}>Oracle Book Library</h1>
+        </div>
+
         <div className={styles.searchContainer}>
           <div className={styles.searchBox}>
             <div className="input-group input-group-lg">
@@ -41,6 +52,7 @@ const Home = () => {
                   setQuery(event.target.value);
                 }}
                 value={query}
+                placeholder="Search Book"
               />
             </div>
           </div>

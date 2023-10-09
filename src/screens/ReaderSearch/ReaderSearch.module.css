@@ -1,7 +1,10 @@
 .container {
   margin: 100px 50px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr ifr;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 .searchContainer {
@@ -17,17 +20,22 @@
 
 .readerListContainer {
   display: grid;
-  grid-template-columns: 1fr;
+  /* grid-template-columns: 1fr; */
   grid-row-gap: 20px;
+  justify-content: center;
 }
 
 .readerBox {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr auto;
   grid-column-gap: 5px;
   border-radius: 5px;
   border: 1px solid rgba(55, 41, 41, 0.2);
   padding: 15px 30px;
+  width: 1000px;
+  justify-content: space-between;
+
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .leftContainer {
