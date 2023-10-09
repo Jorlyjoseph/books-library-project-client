@@ -28,7 +28,10 @@ const BookDetails = ({ details }) => {
     })
       .then(() => {
         successNotify('Book return success');
-        navigate(`/book/${bookId}/history`);
+
+        // for reloading the same page
+        navigate(`/temp`);
+        navigate(-1);
       })
       .catch(() => {
         errorNotify('Book return failed');
@@ -40,9 +43,14 @@ const BookDetails = ({ details }) => {
       method: 'delete',
       url: `${API_URL}/api/books/${bookId}/remove`,
       headers: getAuthHeader()
-    }).then(() => {
-      navigate(`/`);
-    });
+    })
+      .then(() => {
+        successNotify('Book delete success');
+        navigate(`/`);
+      })
+      .catch(() => {
+        errorNotify('Book delete failed');
+      });
   };
 
   return (

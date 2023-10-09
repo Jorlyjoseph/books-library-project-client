@@ -4,6 +4,7 @@ import axios from 'axios';
 import { API_URL } from '../../config';
 import { AuthContext } from '../../context/auth.context';
 import { Link } from 'react-router-dom';
+import { errorNotify, successNotify } from '../../components/Toast/Toast';
 
 const ReaderRegistration = () => {
   const [readerName, setReaderName] = useState('');
@@ -25,12 +26,17 @@ const ReaderRegistration = () => {
         registrationDate: doj
       },
       headers: getAuthHeader()
-    }).then(() => {
-      setReaderName('');
-      setEmail('');
-      setDob('');
-      setDoj('');
-    });
+    })
+      .then(() => {
+        setReaderName('');
+        setEmail('');
+        setDob('');
+        setDoj('');
+        successNotify('Reader added');
+      })
+      .catch(() => {
+        errorNotify('Reader adding faild');
+      });
   };
 
   return (

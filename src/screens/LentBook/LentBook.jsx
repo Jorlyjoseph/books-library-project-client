@@ -12,7 +12,7 @@ const LentBook = () => {
   const { bookId } = useParams();
   const [details, setDetails] = useState({});
   const [readers, setReaders] = useState([]);
-  const [selectedUser, setSelectedUser] = useState('');
+  const [selectedUser, setSelectedUser] = useState('DEFAULT');
   const { getAuthHeader } = useContext(AuthContext);
 
   const submitHandler = (event) => {
@@ -77,7 +77,11 @@ const LentBook = () => {
               onChange={(event) => {
                 setSelectedUser(event.target.value);
               }}
+              value={selectedUser}
             >
+              <option value="DEFAULT" disabled>
+                Please Select
+              </option>
               {readers.map((reader) => (
                 <option value={reader._id} key={reader._id}>
                   {reader.name}
