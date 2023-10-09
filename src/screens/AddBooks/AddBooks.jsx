@@ -4,6 +4,7 @@ import axios from 'axios';
 import { API_URL } from '../../config';
 import { AuthContext } from '../../context/auth.context';
 import { Link } from 'react-router-dom';
+import { errorNotify, successNotify } from '../../components/Toast/Toast';
 
 const AddBooks = () => {
   const [language, setLanguage] = useState('DEFAULT');
@@ -35,17 +36,22 @@ const AddBooks = () => {
         published: published
       },
       headers: getAuthHeader()
-    }).then(() => {
-      setBookTitle('');
-      setBookAuthor('');
-      setCategory('');
-      setLanguage('');
-      setBookLocation('');
-      setImageUrl('');
-      setBookDescription('');
-      setIsbn('');
-      setPublished('');
-    });
+    })
+      .then(() => {
+        setBookTitle('');
+        setBookAuthor('');
+        setCategory('');
+        setLanguage('');
+        setBookLocation('');
+        setImageUrl('');
+        setBookDescription('');
+        setIsbn('');
+        setPublished('');
+        successNotify('Book added');
+      })
+      .catch(() => {
+        errorNotify('Book adding faild');
+      });
   };
 
   return (
